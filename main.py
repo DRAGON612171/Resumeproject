@@ -6,3 +6,5 @@ print("Це рядок Валерії")
 print("adsdfdfjhgjsdkfgh")
 print("Це рядок Роми")
 print("This is my line)")
+
+print ('NazarNazarNazarNazarNazarNazar')
