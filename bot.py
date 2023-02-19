@@ -6,15 +6,16 @@ bot = telebot.TeleBot("5662928795:AAHhdf4WxBx_CGY1x5CU85Y5qR06Y3UgcFQ")
 
 name = ''
 surname = ''
-phone_number = ''           #Рома
-email = ''                  #Рома
+phone_number = ''
+email = ''
 education = ''              #Діма
 skills = ''                 #Діма
 lang = ''                   #Діма
 lang_level = ''             #Назар
 location = ''               #Назар
 work_experience = ''        #Назар
-
+# можна додати ще пункт з своєю мотивацією
+#У кінці треба вивести всі данні, щоб користувач все перевірив
 
 def but_create():
     reply_markup = ReplyKeyboardMarkup(resize_keyboard=True)
@@ -78,8 +79,8 @@ def get_email(message):
         email = message.text
     elif message.text == '-':
         pass
-    msg = bot.send_message(message.chat.id, 'Напишіть ваш email')   #замість другого напішіть, що ви хочете питати наступне
-    bot.register_next_step_handler(msg, get_email)                  #замість другого напишіть наступну функцію
+    # msg = bot.send_message(message.chat.id, 'Напишіть ваш email')   #замість другого напішіть, що ви хочете питати наступне
+    # bot.register_next_step_handler(msg, get_email)                  #замість другого напишіть наступну функцію
     print('email = ', email)
 
 
