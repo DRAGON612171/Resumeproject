@@ -4,13 +4,17 @@ from telebot.types import InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardBut
 
 bot = telebot.TeleBot("5662928795:AAHhdf4WxBx_CGY1x5CU85Y5qR06Y3UgcFQ")
 
-# Name = ''
-# Surname = ''                              # Пропозиція куди можна записувати дані, щоб кидати на базу даних(Але то мені тоже не дуже подобаєтсья)
-# phone_number = ''
-# email = ''
-# education = ''
-# skills = ''
-# lang = ''
+name = ''
+surname = ''
+phone_number = ''
+email = ''
+education = ''
+skills = ''
+lang = ''
+lang_level = ''
+recommendations = ''
+location = ''
+work_experience = ''
 
 
 @bot.message_handler(commands=['start'])                            #можна додати команду, щоб редагувати вже записані відповіді(або кейборд кнопкою)
@@ -42,4 +46,4 @@ def message_reply(message):
         bot.send_message(message.chat.id, 'Напишіть ваше прізвище', reply_markup=reply_markup1)
 
 
-bot.polling(none_stop=True)                                                      #забув написати
+bot.polling(none_stop=True)
