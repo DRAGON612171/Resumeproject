@@ -43,6 +43,8 @@ def get_user_name(message):
     global name
     if message.text:
         name = message.text
+    elif message.text == '-':
+        pass
     msg = bot.send_message(message.chat.id, 'Напишіть ваше прізвище')
     bot.register_next_step_handler(msg, get_surname)
     print('name = ', name)
@@ -52,7 +54,33 @@ def get_surname(message):
     global surname
     if message.text:
         surname = message.text
-        print('surname=', surname)
+    elif message.text == '-':
+        pass
+    msg = bot.send_message(message.chat.id, 'Напишіть ваш номер телефону')
+    bot.register_next_step_handler(msg, get_phone_number)
+    print('surname=', surname)
+
+
+def get_phone_number(message):
+    global phone_number
+    if message.text:
+        phone_number = message.text
+    elif message.text == '-':
+        pass
+    msg = bot.send_message(message.chat.id, 'Напишіть ваш email')
+    bot.register_next_step_handler(msg, get_email)
+    print('phone number = ', phone_number)
+
+
+def get_email(message):
+    global email
+    if message.text:
+        email = message.text
+    elif message.text == '-':
+        pass
+    msg = bot.send_message(message.chat.id, 'Напишіть ваш email')   #замість другого напішіть, що ви хочете питати наступне
+    bot.register_next_step_handler(msg, get_email)                  #замість другого напишіть наступну функцію
+    print('email = ', email)
 
 
 bot.polling(none_stop=True)
