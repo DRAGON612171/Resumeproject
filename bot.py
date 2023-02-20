@@ -2,7 +2,7 @@ import time
 import telebot
 from telebot.types import InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 
-bot = telebot.TeleBot("token")
+bot = telebot.TeleBot("5662928795:AAHhdf4WxBx_CGY1x5CU85Y5qR06Y3UgcFQ")
 
 name = ''
 surname = ''
@@ -132,11 +132,11 @@ def get_location (message):
         location = message.text
     elif message.text == '-':
         pass
-    msg = bot.send_message(message.chat.id, 'Напишіть про ваш досівд роботи')
-    bot.register_next_step_handler(msg, work_experience)
+    msg = bot.send_message(message.chat.id, 'Напишіть про ваш досвід роботи')
+    bot.register_next_step_handler(msg, get_work_experience)
     print('location =', location)
 
-def work_experience (message):
+def get_work_experience (message):
     global work_experience
     if message.text:
         work_experience = message.text
