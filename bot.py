@@ -79,9 +79,42 @@ def get_email(message):
         email = message.text
     elif message.text == '-':
         pass
-    # msg = bot.send_message(message.chat.id, 'Напишіть ваш email')   #замість другого напішіть, що ви хочете питати наступне
-    # bot.register_next_step_handler(msg, get_email)                  #замість другого напишіть наступну функцію
+    msg = bot.send_message(message.chat.id, 'Напишіть про вашу освіту')   #замість другого напішіть, що ви хочете питати наступне
+    bot.register_next_step_handler(msg, get_education)                  #замість другого напишіть наступну функцію
     print('email = ', email)
+
+
+def get_education(message):
+    global education
+    if message.text:
+        education = message.text
+    elif message.text == '-':
+        pass
+    msg = bot.send_message(message.chat.id, 'Напишіть про ваші навички')
+    bot.register_next_step_handler(msg, get_skills)
+    print('skills = ', skills)
+
+
+def get_skills(message):
+    global skills
+    if message.text:
+        skills = message.text
+    elif message.text == '-':
+        pass
+    msg = bot.send_message(message.chat.id, 'Напишіть якими мовами ви володієте')
+    bot.register_next_step_handler(msg, get_lang)
+    print('lang = ', lang)
+
+
+def get_lang(message):
+    global lang
+    if message.text:
+        lang = message.text
+    elif message.text == '-':
+        pass
+    msg = bot.send_message(message.chat.id, 'Напишіть про ваші навички')         #замість другого напиши, що ти хочеш питати наступне(lang_level)
+    bot.register_next_step_handler(msg, get_lang)                                #замість другого напиши наступну функцію
+    print('skills = ', skills)
 
 
 bot.polling(none_stop=True)
