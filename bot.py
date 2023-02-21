@@ -17,6 +17,7 @@ work_experience = ''        #Назар
 # можна додати ще пункт з своєю мотивацією
 #У кінці треба вивести всі данні, щоб користувач все перевірив
 
+
 def but_create():
     reply_markup = ReplyKeyboardMarkup(resize_keyboard=True)
     but1 = KeyboardButton('📄Створити резюме📄')
@@ -116,6 +117,7 @@ def get_lang(message):
     bot.register_next_step_handler(msg, get_lang_level)                                #замість другого напиши наступну функцію
     print('lang = ', lang)
 
+
 def get_lang_level(message):
     global lang_level
     if message.text:
@@ -125,6 +127,7 @@ def get_lang_level(message):
     msg = bot.send_message(message.chat.id, 'Напишіть де ви живете ')
     bot.register_next_step_handler(msg, get_location)
     print('lang_level = ', lang_level)
+
 
 def get_location (message):
     global location
@@ -136,6 +139,7 @@ def get_location (message):
     bot.register_next_step_handler(msg, get_work_experience)
     print('location =', location)
 
+
 def get_work_experience (message):
     global work_experience
     if message.text:
@@ -144,10 +148,6 @@ def get_work_experience (message):
         pass
     bot.send_message(message.chat.id, 'Ваше резюме готове')
     print('work_experience = ', work_experience)
-
-
-
-
 
 
 bot.polling(none_stop=True)
