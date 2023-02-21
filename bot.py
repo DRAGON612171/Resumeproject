@@ -8,12 +8,12 @@ name = ''
 surname = ''
 phone_number = ''
 email = ''
-education = ''              #Діма
-skills = ''                 #Діма
-lang = ''                   #Діма
-lang_level = ''             #Назар
-location = ''               #Назар
-work_experience = ''        #Назар
+education = ''
+skills = ''
+lang = ''
+lang_level = ''
+location = ''
+work_experience = ''
 # можна додати ще пункт з своєю мотивацією
 #У кінці треба вивести всі данні, щоб користувач все перевірив
 
@@ -129,7 +129,7 @@ def get_lang_level(message):
     print('lang_level = ', lang_level)
 
 
-def get_location (message):
+def get_location(message):
     global location
     if message.text:
         location = message.text
@@ -140,7 +140,7 @@ def get_location (message):
     print('location =', location)
 
 
-def get_work_experience (message):
+def get_work_experience(message):
     global work_experience
     if message.text:
         work_experience = message.text
