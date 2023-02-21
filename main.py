@@ -7,3 +7,5 @@ print("adsdfdfjhgjsdkfgh")
 print("Це рядок Роми")
 print("This is my line)")
 print("This is Elon Musk")
+print("hi")
+
