@@ -29,20 +29,13 @@ def but_create():
     return reply_markup
 
 
-
-
-def generate_password(lenght):
+def generate_password():
     letters = string.ascii_letters
     return ''.join(random.choice(letters) for i in range(8))
 
-rand_password = generate_password(8)
-print(rand_password)
-
-
-
 
 @bot.message_handler(commands=['start'])                            #можна додати команду, щоб редагувати вже записані відповіді(або кейборд кнопкою)
-def button_message(message):
+def start(message):
     user_id = message.chat.id
     bot.send_message(message.chat.id, 'Привіт,{}!\n '
                                       'Це бот для створення резюме, думаю тобі сподобається'.format(message.from_user.first_name), reply_markup=but_create())
@@ -52,13 +45,16 @@ def button_message(message):
 @bot.message_handler(content_types=['text'])
 def message_reply(message):
     global name
+    start(message)
     if message.text == '📄Створити резюме📄':
         reply_markup1 = ReplyKeyboardMarkup(resize_keyboard=True)
         msg = bot.send_message(message.chat.id, 'Напишіть ваше ім’я', reply_markup=reply_markup1)
         bot.register_next_step_handler(msg, get_user_name)
 
 
+
 def get_user_name(message):
+    start(message)
     global name
     if message.text:
         name = message.text
@@ -165,6 +161,8 @@ def get_work_experience(message):
         pass
     bot.send_message(message.chat.id, 'Ваше резюме готове')
     print('work_experience = ', work_experience)
+    rand_password = generate_password()
+    print(rand_password)
 
 
 
