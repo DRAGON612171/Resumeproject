@@ -4,7 +4,7 @@ from telebot.types import InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardBut
 import random
 import string
 
-bot = telebot.TeleBot("Token")
+bot = telebot.TeleBot("5662928795:AAHhdf4WxBx_CGY1x5CU85Y5qR06Y3UgcFQ")
 
 name = ''
 surname = ''
