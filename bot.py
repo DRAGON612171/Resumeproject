@@ -1,6 +1,8 @@
 import time
 import telebot
 from telebot.types import InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
+import random
+import string
 
 bot = telebot.TeleBot("Token")
 
@@ -14,6 +16,8 @@ lang = ''
 lang_level = ''
 location = ''
 work_experience = ''
+user_id = ''
+rand_password = ""
 # можна додати ще пункт з своєю мотивацією
 #У кінці треба вивести всі данні, щоб користувач все перевірив
 
@@ -25,11 +29,24 @@ def but_create():
     return reply_markup
 
 
+
+
+def generate_password(lenght):
+    letters = string.ascii_letters
+    return ''.join(random.choice(letters) for i in range(8))
+
+rand_password = generate_password(8)
+print(rand_password)
+
+
+
+
 @bot.message_handler(commands=['start'])                            #можна додати команду, щоб редагувати вже записані відповіді(або кейборд кнопкою)
 def button_message(message):
+    user_id = message.chat.id
     bot.send_message(message.chat.id, 'Привіт,{}!\n '
                                       'Це бот для створення резюме, думаю тобі сподобається'.format(message.from_user.first_name), reply_markup=but_create())
-    print(message)
+    print(user_id, message)
 
 
 @bot.message_handler(content_types=['text'])
@@ -148,6 +165,10 @@ def get_work_experience(message):
         pass
     bot.send_message(message.chat.id, 'Ваше резюме готове')
     print('work_experience = ', work_experience)
+
+
+
+
 
 
 bot.polling(none_stop=True)
