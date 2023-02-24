@@ -49,12 +49,6 @@ def button_message(message):
                                       'Це бот для створення резюме, думаю тобі сподобається'.format(message.from_user.first_name), reply_markup=but_create())
     print(user_id, message)
 
-# def instruction_bot(message):
-#     markup = ReplyKeyboardMarkup(row_width=4)
-#     itembtn1 = KeyboardButton('Як потрібно відповідати')
-#     markup.add(itembtn1)
-#     bot.reply_to(message, "Привіт,{}!\n "
-#                           "Це бот для створення резюме, думаю тобі сподобається", reply_markup=markup)
 
 @bot.message_handler(content_types=['text'])
 def message_reply(message):
