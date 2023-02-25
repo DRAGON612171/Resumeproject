@@ -234,7 +234,21 @@ def get_work_experience(message):
         start(message)
     else:
         past_work = message.text
-    bot.send_message(message.chat.id, 'Ваше резюме готове, перевірте свої дані:')
+    bot.send_message(message.chat.id, "Ваше резюме готове, перевірте свої дані:\n"
+                                      f"Ім'я: {name}\n" \
+                                      f"Прізвище: {surname}\n" \
+                                      f"Номер телефону: {phone_number}\n" \
+                                      f"Електронна пошта: {email}\n" \
+                                      f"Освіта: {education}\n" \
+                                      f"Навички: {skills}\n" \
+                                      f"Посилання на ваші проекти: {projects}\n"
+                                      f"Мови: {lang}\n"\
+                                      f"Рівень знання цих мов: {lang_level}\n"
+                                      f"Ваша країна: {coutry}\n" \
+                                      f"Ваше місто: {city}\n" \
+                                      f"Посада на яку претендуєте: {profession}\n" \
+                                      f"Ваші очікування від роботи: {description}\n" \
+                                      f"Ваша минула робота: {past_work}\n")
     rand_password = generate_password()
     print('work_experience = ', past_work)
     print('password = ', rand_password)
