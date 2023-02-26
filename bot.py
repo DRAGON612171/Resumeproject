@@ -3,6 +3,7 @@ import telebot
 from telebot.types import InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 import random
 import string
+from db import readTable, writeTable
 
 bot = telebot.TeleBot("5662928795:AAHhdf4WxBx_CGY1x5CU85Y5qR06Y3UgcFQ")
 
@@ -16,7 +17,7 @@ skills = list()
 projects = list()
 lang = list()
 lang_level = list()
-coutry = ''
+country = ''
 city = ''
 past_work = ''
 user_id = ''
@@ -39,6 +40,7 @@ def generate_password():
 
 @bot.message_handler(commands=['start'])                            #можна додати команду, щоб редагувати вже записані відповіді(або кейборд кнопкою)
 def start(message):
+    global user_id
     user_id = message.chat.id
     bot.send_message(message.chat.id, 'Привіт,{}!\n '
                                       'Це бот для створення резюме, думаю тобі сподобається'.format(message.from_user.first_name), reply_markup=but_create())
@@ -48,6 +50,8 @@ def start(message):
 @bot.message_handler(content_types=['text'])
 def message_reply(message):
     global name
+    global user_id
+    user_id = message.chat.id
     if message.text == '📄Створити резюме📄':
         reply_markup1 = ReplyKeyboardMarkup(resize_keyboard=True)
         msg = bot.send_message(message.chat.id, 'Напишіть ваше ім’я', reply_markup=reply_markup1)
@@ -145,7 +149,7 @@ def get_projects(message):
     else:
         projects = message.text
         bot.register_next_step_handler(msg, get_lang)
-    print('skills = ', projects)
+    print('projects = ', projects)
 
 
 def get_lang(message):
@@ -175,16 +179,16 @@ def get_lang_level(message):
 
 
 def get_country(message):
-    global counry
+    global country
     msg = bot.send_message(message.chat.id, 'Напишіть з якого ви міста')
     if message.text == '-':
         bot.register_next_step_handler(msg, get_city)
     elif message.text == '/start':
         start(message)
     else:
-        counry = message.text
+        country = message.text
         bot.register_next_step_handler(msg, get_city)
-    print('country =', coutry)
+    print('country =', country)
 
 
 def get_city(message):
@@ -196,7 +200,7 @@ def get_city(message):
         start(message)
     else:
         city = message.text
-        bot.register_next_step_handler(msg, get_work_experience)
+        bot.register_next_step_handler(msg, get_profession)
     print('city =', city)
 
 
@@ -234,8 +238,9 @@ def get_work_experience(message):
         start(message)
     else:
         past_work = message.text
-    bot.send_message(message.chat.id, 'Ваше резюме готове, перевірте свої дані:')
+    bot.send_message(message.chat.id, 'Ваше резюме майже готове, перевірте свої дані:')
     rand_password = generate_password()
+    writeTable(user_id, name, surname, phone_number, email, education, skills, projects, lang, lang_level, country, city, past_work, rand_password, description, profession)
     print('work_experience = ', past_work)
     print('password = ', rand_password)
 
