@@ -8,8 +8,7 @@ from db import readTable, writeTable
 bot = telebot.TeleBot("5662928795:AAHhdf4WxBx_CGY1x5CU85Y5qR06Y3UgcFQ")
 
 profession = ''
-name = ''
-surname = ''
+name_surname = ''
 phone_number = ''
 email = ''
 education = ''
@@ -49,31 +48,17 @@ def start(message):
 
 @bot.message_handler(content_types=['text'])
 def message_reply(message):
-    global name
+    global name_surname
     global user_id
     user_id = message.chat.id
     if message.text == '📄Створити резюме📄':
         reply_markup1 = ReplyKeyboardMarkup(resize_keyboard=True)
-        msg = bot.send_message(message.chat.id, 'Напишіть ваше ім’я', reply_markup=reply_markup1)
-        bot.register_next_step_handler(msg, get_user_name)
+        msg = bot.send_message(message.chat.id, 'Напишіть ваше ім’я і прізвище', reply_markup=reply_markup1)
+        bot.register_next_step_handler(msg, get_name_surname)
 
 
-def get_user_name(message):
-    global name
-    msg = bot.send_message(message.chat.id, 'Напишіть ваше прізвище')
-    if message.text == '-':
-        bot.register_next_step_handler(msg, get_surname)
-    elif message.text == '/start':
-        bot.clear_step_handler(message)
-        start(message)
-    else:
-        name = message.text
-        bot.register_next_step_handler(msg, get_surname)
-    print('name = ', name)
-
-
-def get_surname(message):
-    global surname
+def get_name_surname(message):
+    global name_surname
     msg = bot.send_message(message.chat.id, 'Напишіть ваш номер телефону')
     if message.text == '-':
         bot.register_next_step_handler(msg, get_phone_number)
@@ -81,9 +66,9 @@ def get_surname(message):
         bot.clear_step_handler(message)
         start(message)
     else:
-        surname = message.text
+        name_surname = message.text
         bot.register_next_step_handler(msg, get_phone_number)
-    print('surname =', surname)
+    print('surname =', name_surname)
 
 
 def get_phone_number(message):
@@ -238,10 +223,8 @@ def get_work_experience(message):
         start(message)
     else:
         past_work = message.text
-    bot.send_message(message.chat.id, 'Ваше резюме майже готове, перевірте свої дані:')
     bot.send_message(message.chat.id, "Ваше резюме готове, перевірте свої дані:\n"
-                                      f"Ім'я: {name}\n" 
-                                      f"Прізвище: {surname}\n" 
+                                      f"Ім'я та прізивще: {name_surname}\n"  
                                       f"Номер телефону: {phone_number}\n" 
                                       f"Електронна пошта: {email}\n" 
                                       f"Освіта: {education}\n" 
@@ -255,7 +238,7 @@ def get_work_experience(message):
                                       f"Ваші очікування від роботи: {description}\n" 
                                       f"Ваша минула робота: {past_work}\n")
     rand_password = generate_password()
-    writeTable(user_id, name, surname, phone_number, email, education, skills, projects, lang, lang_level, country, city, past_work, rand_password, description, profession)
+    writeTable(user_id, name_surname, phone_number, email, education, skills, projects, lang, lang_level, country, city, past_work, rand_password, description, profession)
     print('work_experience = ', past_work)
     print('password = ', rand_password)
 
