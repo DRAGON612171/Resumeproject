@@ -156,6 +156,10 @@ def get_projects(message):
         bot.register_next_step_handler(msg, get_lang)
     elif message.text == '/start':
         start(message)
+    if update:
+        projects = message.text
+        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end())
+        update = False
     else:
         projects = message.text
         bot.register_next_step_handler(msg, get_lang)
@@ -169,6 +173,10 @@ def get_lang(message):
         bot.register_next_step_handler(msg, get_lang_level)
     elif message.text == '/start':
         start(message)
+    if update:
+        lang = message.text
+        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end())
+        update = False
     else:
         lang = message.text
         bot.register_next_step_handler(msg, get_lang_level)
@@ -177,11 +185,15 @@ def get_lang(message):
 
 def get_lang_level(message):
     global lang_level, update
-    msg = bot.send_message(message.chat.id, 'Напишіть з якої ви країни')
+    msg = bot.send_message(message.chat.id, 'Напишіть в якій країні ви живете')
     if message.text == '-':
         bot.register_next_step_handler(msg, get_country)
     elif message.text == '/start':
         start(message)
+    if update:
+        lang_level = message.text
+        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end())
+        update = False
     else:
         lang_level = message.text
         bot.register_next_step_handler(msg, get_country)
@@ -190,11 +202,15 @@ def get_lang_level(message):
 
 def get_country(message):
     global country, update
-    msg = bot.send_message(message.chat.id, 'Напишіть з якого ви міста')
+    msg = bot.send_message(message.chat.id, 'Напишіть в якому місті ви живете')
     if message.text == '-':
         bot.register_next_step_handler(msg, get_city)
     elif message.text == '/start':
         start(message)
+    if update:
+        country = message.text
+        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end())
+        update = False
     else:
         country = message.text
         bot.register_next_step_handler(msg, get_city)
@@ -323,6 +339,23 @@ def go_changes(call, id, name_surname, phone_number, email, education, skills, p
         update = True
         msg = bot.send_message(call.from_user.id, 'Напишіть про ваші навички')
         bot.register_next_step_handler(msg, get_skills)
+    if call.data == '6':
+        update = True
+        msg = bot.send_message(call.from_user.id, 'Напишіть про ваші проекти або надішліть посилання на них')
+        bot.register_next_step_handler(msg, get_projects)
+    elif call.data == '7':
+        update = True
+        msg = bot.send_message(call.from_user.id, 'Напишіть якими мовами ви володієте')
+        bot.register_next_step_handler(msg, get_lang)
+    if call.data == '8':
+        update = True
+        msg = bot.send_message(call.from_user.id, 'Напишіть рівень знання цих мов')
+        bot.register_next_step_handler(msg, get_lang_level)
+    elif call.data == '9':
+        update = True
+        msg = bot.send_message(call.from_user.id, 'Напишіть в якій країні ви живете')
+        bot.register_next_step_handler(msg, get_country)
+
 
 
 bot.polling(none_stop=True)
