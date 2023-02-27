@@ -48,7 +48,6 @@ def start(message):
 
 @bot.message_handler(content_types=['text'])
 def message_reply(message):
-    global name_surname
     global user_id
     user_id = message.chat.id
     if message.text == '📄Створити резюме📄':
@@ -58,7 +57,7 @@ def message_reply(message):
 
 
 def get_name_surname(message):
-    global name_surname
+    global name_surname, update
     if message.text == '-' and not update:
         msg = bot.send_message(message.chat.id, 'Напишіть ваш номер телефону')
         bot.register_next_step_handler(msg, get_phone_number)
@@ -69,6 +68,7 @@ def get_name_surname(message):
     if update:
         name_surname = message.text
         bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end())
+        update = False
     else:
         msg = bot.send_message(message.chat.id, 'Напишіть ваш номер телефону')
         name_surname = message.text
@@ -77,7 +77,7 @@ def get_name_surname(message):
 
 
 def get_phone_number(message):
-    global phone_number
+    global phone_number, update
     if message.text == '-' and not update:
         msg = bot.send_message(message.chat.id, 'Напишіть ваш email')
         bot.register_next_step_handler(msg, get_email)
@@ -87,6 +87,7 @@ def get_phone_number(message):
     if update:
         phone_number = message.text
         bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end())
+        update = False
     else:
         msg = bot.send_message(message.chat.id, 'Напишіть ваш email')
         phone_number = message.text
@@ -95,7 +96,7 @@ def get_phone_number(message):
 
 
 def get_email(message):
-    global email
+    global email, update
     if message.text == '-' and not update:
         msg = bot.send_message(message.chat.id, 'Напишіть про вашу освіту')
         bot.register_next_step_handler(msg, get_education)
@@ -104,6 +105,7 @@ def get_email(message):
     if update:
         email = message.text
         bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end())
+        update = False
     else:
         msg = bot.send_message(message.chat.id, 'Напишіть про вашу освіту')
         email = message.text
@@ -112,7 +114,7 @@ def get_email(message):
 
 
 def get_education(message):
-    global education
+    global education, update
     if message.text == '-' and not update:
         msg = bot.send_message(message.chat.id, 'Напишіть про ваші навички')
         bot.register_next_step_handler(msg, get_skills)
@@ -121,6 +123,7 @@ def get_education(message):
     if update:
         education = message.text
         bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end())
+        update = False
     else:
         msg = bot.send_message(message.chat.id, 'Напишіть про ваші навички')
         education = message.text
@@ -129,7 +132,7 @@ def get_education(message):
 
 
 def get_skills(message):
-    global skills
+    global skills, update
     if message.text == '-' and not update:
         msg = bot.send_message(message.chat.id, 'Вставте посилання на ваші проекти')
         bot.register_next_step_handler(msg, get_projects)
@@ -138,6 +141,7 @@ def get_skills(message):
     if update:
         skills = message.text
         bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end())
+        update = False
     else:
         msg = bot.send_message(message.chat.id, 'Вставте посилання на ваші проекти')
         skills = message.text
@@ -146,7 +150,7 @@ def get_skills(message):
 
 
 def get_projects(message):
-    global projects
+    global projects, update
     msg = bot.send_message(message.chat.id, 'Напишіть якими мовами ви володієте')
     if message.text == '-':
         bot.register_next_step_handler(msg, get_lang)
@@ -159,7 +163,7 @@ def get_projects(message):
 
 
 def get_lang(message):
-    global lang
+    global lang, update
     msg = bot.send_message(message.chat.id, 'Напишіть про рівень знання цих мов')
     if message.text == '-':
         bot.register_next_step_handler(msg, get_lang_level)
@@ -172,7 +176,7 @@ def get_lang(message):
 
 
 def get_lang_level(message):
-    global lang_level
+    global lang_level, update
     msg = bot.send_message(message.chat.id, 'Напишіть з якої ви країни')
     if message.text == '-':
         bot.register_next_step_handler(msg, get_country)
@@ -185,7 +189,7 @@ def get_lang_level(message):
 
 
 def get_country(message):
-    global country
+    global country, update
     msg = bot.send_message(message.chat.id, 'Напишіть з якого ви міста')
     if message.text == '-':
         bot.register_next_step_handler(msg, get_city)
@@ -198,7 +202,7 @@ def get_country(message):
 
 
 def get_city(message):
-    global city
+    global city, update
     msg = bot.send_message(message.chat.id, 'Напишіть на яку посаду претендуєте')
     if message.text == '-':
         bot.register_next_step_handler(msg, get_work_experience)
@@ -211,7 +215,7 @@ def get_city(message):
 
 
 def get_profession(message):
-    global profession
+    global profession, update
     msg = bot.send_message(message.chat.id, 'Напишіть ваші очікування від роботи')
     if message.text == '-':
         bot.register_next_step_handler(msg, get_description)
@@ -224,7 +228,7 @@ def get_profession(message):
 
 
 def get_description(message):
-    global description
+    global description, update
     msg = bot.send_message(message.chat.id, 'Напишіть про ваш минулий досвід роботи')
     if message.text == '-':
         bot.register_next_step_handler(msg, get_work_experience)
@@ -245,7 +249,7 @@ def end():
 
 
 def get_work_experience(message):
-    global past_work
+    global past_work, update
     if message.text == '-':
         bot.send_message(message.chat.id, 'Ваше резюме готове')
     elif message.text == '/start':
@@ -309,15 +313,15 @@ def go_changes(call, id, name_surname, phone_number, email, education, skills, p
         bot.register_next_step_handler(msg, get_phone_number)
     elif call.data == '3':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть про вашу освіту')
+        msg = bot.send_message(call.from_user.id, 'Напишіть ваш email')
         bot.register_next_step_handler(msg, get_email)
     if call.data == '4':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть про ваші навички')
+        msg = bot.send_message(call.from_user.id, 'Напишіть про вашу освіту')
         bot.register_next_step_handler(msg, get_education)
     elif call.data == '5':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Вставте посилання на ваші проекти')
+        msg = bot.send_message(call.from_user.id, 'Напишіть про ваші навички')
         bot.register_next_step_handler(msg, get_skills)
 
 
