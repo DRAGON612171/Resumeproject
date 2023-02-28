@@ -61,7 +61,7 @@ def get_name_surname(message):
     if message.text == '-' and not update:
         msg = bot.send_message(message.chat.id, 'Напишіть ваш номер телефону')
         bot.register_next_step_handler(msg, get_phone_number)
-    elif message.text == '/start' and not update:
+    elif message.text == '/start' :
         bot.clear_step_handler(message)
         start(message)
         print(name_surname)
@@ -81,7 +81,7 @@ def get_phone_number(message):
     if message.text == '-' and not update:
         msg = bot.send_message(message.chat.id, 'Напишіть ваш email')
         bot.register_next_step_handler(msg, get_email)
-    elif message.text == '/start' and not update:
+    elif message.text == '/start' :
         bot.clear_step_handler(message)
         start(message)
     if update:
@@ -100,7 +100,7 @@ def get_email(message):
     if message.text == '-' and not update:
         msg = bot.send_message(message.chat.id, 'Напишіть про вашу освіту')
         bot.register_next_step_handler(msg, get_education)
-    elif message.text == '/start' and not update:
+    elif message.text == '/start' :
         start(message)
     if update:
         email = message.text
@@ -118,7 +118,7 @@ def get_education(message):
     if message.text == '-' and not update:
         msg = bot.send_message(message.chat.id, 'Напишіть про ваші навички')
         bot.register_next_step_handler(msg, get_skills)
-    elif message.text == '/start' and not update:
+    elif message.text == '/start' :
         start(message)
     if update:
         education = message.text
@@ -136,7 +136,7 @@ def get_skills(message):
     if message.text == '-' and not update:
         msg = bot.send_message(message.chat.id, 'Вставте посилання на ваші проекти')
         bot.register_next_step_handler(msg, get_projects)
-    elif message.text == '/start' and not update:
+    elif message.text == '/start' :
         start(message)
     if update:
         skills = message.text
@@ -152,7 +152,7 @@ def get_skills(message):
 def get_projects(message):
     global projects, update
     msg = bot.send_message(message.chat.id, 'Напишіть якими мовами ви володієте')
-    if message.text == '-':
+    if message.text == '-' and not update:
         bot.register_next_step_handler(msg, get_lang)
     elif message.text == '/start':
         start(message)
@@ -169,7 +169,7 @@ def get_projects(message):
 def get_lang(message):
     global lang, update
     msg = bot.send_message(message.chat.id, 'Напишіть про рівень знання цих мов')
-    if message.text == '-':
+    if message.text == '-' and not update:
         bot.register_next_step_handler(msg, get_lang_level)
     elif message.text == '/start':
         start(message)
@@ -186,7 +186,7 @@ def get_lang(message):
 def get_lang_level(message):
     global lang_level, update
     msg = bot.send_message(message.chat.id, 'Напишіть в якій країні ви живете')
-    if message.text == '-':
+    if message.text == '-' and not update:
         bot.register_next_step_handler(msg, get_country)
     elif message.text == '/start':
         start(message)
@@ -203,7 +203,7 @@ def get_lang_level(message):
 def get_country(message):
     global country, update
     msg = bot.send_message(message.chat.id, 'Напишіть в якому місті ви живете')
-    if message.text == '-':
+    if message.text == '-' and not update:
         bot.register_next_step_handler(msg, get_city)
     elif message.text == '/start':
         start(message)
@@ -220,10 +220,14 @@ def get_country(message):
 def get_city(message):
     global city, update
     msg = bot.send_message(message.chat.id, 'Напишіть на яку посаду претендуєте')
-    if message.text == '-':
-        bot.register_next_step_handler(msg, get_work_experience)
+    if message.text == '-' and not update:
+        bot.register_next_step_handler(msg, get_profession)
     elif message.text == '/start':
         start(message)
+    if update:
+        city = message.text
+        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end())
+        update = False
     else:
         city = message.text
         bot.register_next_step_handler(msg, get_profession)
@@ -233,10 +237,14 @@ def get_city(message):
 def get_profession(message):
     global profession, update
     msg = bot.send_message(message.chat.id, 'Напишіть ваші очікування від роботи')
-    if message.text == '-':
+    if message.text == '-' and not update:
         bot.register_next_step_handler(msg, get_description)
     elif message.text == '/start':
         start(message)
+    if update:
+        profession = message.text
+        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end())
+        update = False
     else:
         profession = message.text
         bot.register_next_step_handler(msg, get_description)
@@ -246,10 +254,14 @@ def get_profession(message):
 def get_description(message):
     global description, update
     msg = bot.send_message(message.chat.id, 'Напишіть про ваш минулий досвід роботи')
-    if message.text == '-':
+    if message.text == '-' and not update:
         bot.register_next_step_handler(msg, get_work_experience)
     elif message.text == '/start':
         start(message)
+    if update:
+        description = message.text
+        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end())
+        update = False
     else:
         description = message.text
         bot.register_next_step_handler(msg, get_work_experience)
@@ -265,13 +277,13 @@ def end():
 
 
 def get_work_experience(message):
-    global past_work, update
-    if message.text == '-':
-        bot.send_message(message.chat.id, 'Ваше резюме готове')
+    global work_experience, update
+    if message.text == '-' and not update:
+        bot.send_message(message.chat.id, 'Напишіть про вашу минулу роботу')
     elif message.text == '/start':
         start(message)
     else:
-        past_work = message.text
+        work_experience = message.text
     bot.send_message(message.chat.id, "Ваше резюме готове, перевірте свої дані:\n"
                                       f"Ім'я та прізивще: {name_surname}\n"  
                                       f"Номер телефону: {phone_number}\n" 
@@ -285,10 +297,10 @@ def get_work_experience(message):
                                       f"Ваше місто: {city}\n" 
                                       f"Посада на яку претендуєте: {profession}\n" 
                                       f"Ваші очікування від роботи: {description}\n" 
-                                      f"Ваша минула робота: {past_work}\n"
+                                      f"Ваша минула робота: {work_experience}\n"
                                       "Чи хочете відредагувати свої дані?'\n", reply_markup=end())
     #writeTable(user_id, name_surname, phone_number, email, education, skills, projects, lang, lang_level, country, city, past_work, rand_password, description, profession)
-    print('work_experience = ', past_work)
+    print('work_experience = ', work_experience)
 
 
 def changes():
@@ -311,14 +323,14 @@ def changes():
 
 
 @bot.callback_query_handler(func=lambda c: True)
-def go_changes(call, id, name_surname, phone_number, email, education, skills, projects, lang, lang_level, country, city, past_work, description, profession):
+def go_changes(call):
     global update, rand_password
     if call.data == '15':
         bot.send_message(call.from_user.id, 'Що бажаєте змінити?', reply_markup=changes())
     if call.data == '16':
         rand_password = generate_password()
         bot.send_message(call.from_user.id, 'Майже все готово')
-        writeTable(id, name_surname, phone_number, email, education, skills, projects, lang, lang_level, country, city, past_work, rand_password, description, profession)
+        writeTable()
     elif call.data == '1':
         update = True
         msg = bot.send_message(call.from_user.id, 'Напишіть ваше ім’я і прізвище')
@@ -355,6 +367,24 @@ def go_changes(call, id, name_surname, phone_number, email, education, skills, p
         update = True
         msg = bot.send_message(call.from_user.id, 'Напишіть в якій країні ви живете')
         bot.register_next_step_handler(msg, get_country)
+    if call.data == '10':
+            update = True
+            msg = bot.send_message(call.from_user.id, 'Напишіть в якому місті ви живете')
+            bot.register_next_step_handler(msg, get_city)
+    elif call.data == '11':
+        update = True
+        msg = bot.send_message(call.from_user.id, 'Напишіть на яку посаду претендуєте')
+        bot.register_next_step_handler(msg, get_profession)
+    if call.data == '12':
+            update = True
+            msg = bot.send_message(call.from_user.id, 'Напишіть ваші очікування від роботи')
+            bot.register_next_step_handler(msg, get_description)
+    elif call.data == '13':
+        update = True
+        msg = bot.send_message(call.from_user.id, 'Напишіть про ваш минулий досвід роботи')
+        bot.register_next_step_handler(msg, get_work_experience)
+
+
 
 
 
