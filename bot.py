@@ -2,7 +2,7 @@ import telebot
 from telebot.types import InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup
 import random
 import string
-from main_db import readTable, writeTable
+from app.main_db import writeTable
 
 bot = telebot.TeleBot("5662928795:AAHhdf4WxBx_CGY1x5CU85Y5qR06Y3UgcFQ")
 

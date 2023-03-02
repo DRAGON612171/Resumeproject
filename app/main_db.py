@@ -57,3 +57,5 @@ def readTable():
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
 
+
+readTable()
