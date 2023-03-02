@@ -24,7 +24,7 @@ def readTable():
         print(error)
 
 
-def writeTable(id, name, surname, phone_number, email, education, skills, projects, lang, lang_level, country, city, past_work, password, description, profession):
+def writeTable(id, name_surname, phone_number, email, education, skills, projects, lang, lang_level, country, city, past_work, password, description, profession):
     """ Connect to the PostgreSQL database server """
     conn = psycopg2.connect(
         host="127.0.0.1",
@@ -39,7 +39,7 @@ def writeTable(id, name, surname, phone_number, email, education, skills, projec
         cur.execute('''INSERT INTO public.resume_users(
                    id, name, surname, phone_number, email, education, skills,
                    projects, lang, lang_level, country, city, past_work, password, description, profession)
-                   VALUES ({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {});'''.format(id, name, surname, phone_number, email, education, skills, projects, lang, lang_level, country, city, past_work, password, description, profession))
+                   VALUES ({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {});'''.format(id, name_surname, phone_number, email, education, skills, projects, lang, lang_level, country, city, past_work, password, description, profession))
 
         conn.commit()
         conn.close()
