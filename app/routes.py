@@ -1,7 +1,7 @@
 from app import app
 from flask import render_template
 
-from main_db import readTable
+from app.main_db import readTable
 
 
 @app.route("/")

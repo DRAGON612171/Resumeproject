@@ -22,7 +22,7 @@ def writeTable(id, name_surname, phone_number, email, education, skills, project
             cur.execute("""INSERT INTO public.resume_db(
                             id, name_surname, phone_number, email, education, skills, projects, lang, lang_level, 
                             country, city, past_work, password, " description", profession)
-                            VALUES ({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {});""".format(id,
+                            VALUES ({}, '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}');""".format(id,
                             name_surname, phone_number, email, education, skills, projects, lang, lang_level, country,
                             city, past_work, password, description, profession))
             connection.commit()
