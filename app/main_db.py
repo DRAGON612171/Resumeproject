@@ -39,9 +39,9 @@ def readTable():
     postgres_host_port = 13055
     try:
         with sshtunnel.SSHTunnelForwarder(('ssh.pythonanywhere.com'),
-            ssh_username='goiteens',
-            ssh_password='productionteam123',
-            remote_bind_address=(postgres_hostname, postgres_host_port)) as tunnel:
+                ssh_username='goiteens',
+                ssh_password='productionteam123',
+                remote_bind_address=(postgres_hostname, postgres_host_port)) as tunnel:
             connection = psycopg2.connect(
                 user='super', password='kxfs!9E26VGnpzK',
                 host='127.0.0.1', port=tunnel.local_bind_port,
