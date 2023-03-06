@@ -12,7 +12,7 @@ def index():
     phone_number = ''
     email = ''
     education = ''
-    skills, projects, lang, lang_level = list(), list(), list(), list()
+    tech_skills, soft_skills, projects, lang, lang_level = list(), list(), list(), '', ''
     country = ''
     city = ''
     past_work = ''
@@ -21,7 +21,7 @@ def index():
     description = ''
 
     def portal():
-        nonlocal name_surname, phone_number, email, education, skills, projects, lang, lang_level, \
+        nonlocal name_surname, phone_number, email, education, tech_skills, projects, lang, lang_level, \
                             country, city, past_work, description, profession
         result = readTable()
         profession = result[0][-1]
@@ -29,7 +29,7 @@ def index():
         phone_number = result[0][2]
         email = result[0][3]
         education = result[0][4]
-        skills = result[0][5]
+        tech_skills = result[0][5]
         projects = result[0][6]
         lang = result[0][7]
         lang_level = result[0][8]
@@ -40,6 +40,6 @@ def index():
 
     portal()
     return render_template('index.html', profession=profession, name_surname=name_surname, phone_number=phone_number,\
-                           email=email, education=education, skills=skills, projects=projects, lang=lang,\
+                           email=email, education=education, tech_skills=tech_skills, projects=projects, lang=lang,\
                            lang_level=lang_level, country=country, city=city, past_work=past_work, description=description)
 

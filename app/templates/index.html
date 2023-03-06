@@ -62,6 +62,38 @@
         line-height: 24px;
         margin-right: 5px;
     }
+
+    .sidebar_title {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 27px;
+    }
+
+    .contact_link {
+        margin-left: 5px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 24px;
+        color: #565E6A;
+    }
+
+    .skills_list {
+        padding-left: 18px;
+    }
+
+    .skills_item {
+        color: #FB6D3A;
+    }
+
+    .skills_item_text {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 24px;
+        color: #fff;
+    }
 </style>
 <body>
     <!-- body of page -->
@@ -79,7 +111,9 @@
             <div class="projects">
                 <h3>Project</h3>
                 <ol>
+                    {% for proj in projects %}
                     <li class="project_item"><a href={{projects}}>{{projects}}</a></li>
+                    {% endfor %}
                 </ol>
             </div>
             <!-- Education-->
@@ -102,38 +136,45 @@
         <aside class="sidebar">
             <!--Contact-->
             <div class="contact">
-                <h3>Contacts</h3>
+                <h3 class="sidebar_title">Contacts</h3>
                 <div>
                     <span>Number:</span>
-                    <a href="tel:{{phone_number}}">{{phone_number}}</a>
+                    <a class="contact_link" href="tel:{{phone_number}}">{{phone_number}}</a>
                 </div>
                 <div>
                     <span>Email:</span>
-                    <a href="mailto:{{email}}">{{email}}</a>
+                    <a class="contact_link" href="mailto:{{email}}">{{email}}</a>
                 </div>
             </div>
             <!--Tech skills-->
             <div class="tech">
-                <h3>Tech Skills</h3>
-                <ul>
-                    <li>{{skills}}</li>
+                <h3 class="sidebar_title">Tech Skills</h3>
+                <ul class="skills_list">
+                    {% for skll in tech_skills %}
+                    <li class="skills_item"> <span class="skills_item_text">{{tech_skills}}</span></li>
+                    {% endfor %}
                 </ul>
             </div>
-<!--            &lt;!&ndash; Soft Skills&ndash;&gt;-->
-<!--            <div class="soft">-->
-<!--                <h3>Soft Skills</h3>-->
-<!--                <ul>-->
-<!--                    <li>{{soft_skill}}</li>-->
-<!--                </ul>-->
-<!--            </div>-->
+            <!-- Soft Skills-->
+            <div class="soft">
+                <h3 class="sidebar_title">Soft Skills</h3>
+                <ul class="skills_list">
+                    <li class="skills_item"> <span class="skills_item_text">{{soft_skill}}</span></li>
+                </ul>
+            </div>
             <!--Langauge-->
             <div class="lang">
-                <h3>Languages</h3>
-                <ul>
-                    <li><p>{{lang}} - <span>{{lang_level}}</span></p></li>
+                <h3 class="sidebar_title">Languages</h3>
+                <ul class="skills_list">
+                    {% for i in lang %}
+                    {% for i in lang_level %}
+                    <li class="skills_item"><p> <span class="skills_item_text">{{lang}} - <span>{{lang_level}}</span></span></p></li>
+                    {% endfor %}
+                    {% endfor %}
                 </ul>
             </div>
         </aside>
     </div>
 </body>
 </html>
+
