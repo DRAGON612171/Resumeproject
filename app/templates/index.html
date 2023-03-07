@@ -56,11 +56,8 @@
         margin: 50px 0px 0px 40px;
     }
 
-    .n{
-        font-weight: bold;
-        font-size: 14px;
-        line-height: 24px;
-        margin-right: 5px;
+    .pst_wrk {
+        color: #FB6D3A;
     }
 
     .sidebar_title {
@@ -111,8 +108,8 @@
             <div class="projects">
                 <h3>Project</h3>
                 <ol>
-                    {% for proj in projects %}
-                    <li class="project_item"><a href={{projects}}>{{projects}}</a></li>
+                    {% for i in range(projects | length) %}
+                    <li class="project_item"><a href={{projects}}>{{projects[i]}}</a></li>
                     {% endfor %}
                 </ol>
             </div>
@@ -125,10 +122,14 @@
             <div class="experience">
                 <h3>Work Experience</h3>
                 <div>
-                    <h4>{{past_work}}</h4>
-                    <p>{{how_long}}</p>
+                    <h4 class="pst_wrk">{{past_work}}</h4>
+                    {% for a in range( how_long | length ) %}
+                    <p>{{how_long[a]}}</p>
+                    {% endfor %}
                     <ul>
-                        <li>{{job_description}}</li>
+                        {% for i in range(job_description | length) %}
+                        <li> <span>{{job_description[i]}}</span></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -150,8 +151,8 @@
             <div class="tech">
                 <h3 class="sidebar_title">Tech Skills</h3>
                 <ul class="skills_list">
-                    {% for skll in tech_skills %}
-                    <li class="skills_item"> <span class="skills_item_text">{{tech_skills}}</span></li>
+                    {% for i in range(tech_skills | length) %}
+                    <li class="skills_item"> <span class="skills_item_text">{{tech_skills[i]}}</span></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -159,17 +160,17 @@
             <div class="soft">
                 <h3 class="sidebar_title">Soft Skills</h3>
                 <ul class="skills_list">
-                    <li class="skills_item"> <span class="skills_item_text">{{soft_skill}}</span></li>
+                    {% for i in range(soft_skills | length) %}
+                    <li class="skills_item"> <span class="skills_item_text">{{soft_skills[i]}}</span></li>
+                    {% endfor %}
                 </ul>
             </div>
             <!--Langauge-->
             <div class="lang">
                 <h3 class="sidebar_title">Languages</h3>
                 <ul class="skills_list">
-                    {% for i in lang %}
-                    {% for i in lang_level %}
-                    <li class="skills_item"><p> <span class="skills_item_text">{{lang}} - <span>{{lang_level}}</span></span></p></li>
-                    {% endfor %}
+                    {% for i in range(lang | length) %}
+                    <li class="skills_item"><p> <span class="skills_item_text">{{lang[i]}} - <span>{{lang_level[i]}}</span></span></p></li>
                     {% endfor %}
                 </ul>
             </div>
