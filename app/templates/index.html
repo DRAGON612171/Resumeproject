@@ -26,44 +26,85 @@
     }
 
     .main_context{
-        width: 790px;
-        padding: 24px;
-    }
-
-    .person, .projects, .education, .experience, .expectation{
-        color: black;
-        margin: 30px;
-    }
-
-    .li{
-        margin-bottom: 5px;
-        font-size: 14px;
-        line-height: 24px;
+        width: 750px;
+        padding: 100px 90px;
     }
 
     .profession{
+        font-style: normal;
         font-size: 14px;
-        font-weight: 700;
+        line-height: 17px;
+        font-weight: bold;
         color: #000;
+        margin: 0 0 20px 0;
     }
 
-    .skills_item {
-        margin-top: 10px;
+    .name {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 35px;
+        line-height: 45px;
+        color: #000;
+        margin: 0 0 25px 0;
+    }
+
+    .description {
+        width: 500px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 24px;
+        color: #595959;
+    }
+
+    .main_title {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 27px;
+        color: #000;
         margin-bottom: 10px;
+    }
+
+    .projects_list, .pst_wrk_list {
+        padding: 0 0 0 18px;
+    }
+
+    .des {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 24px;
+        margin: 0 0 0 5px;
+    }
+
+    .person, .projects, .education, .experience{
+        color: black;
+        margin: 0 0 40px 0;
+    }
+
+    .edu {
+        color: #FB6D3A;
+    }
+
+    .pst_wrk {
+        color: #ff0000;
+    }
+
+    .li{
+        font-size: 14px;
+        line-height: 24px;
     }
 
     .sidebar{
         background-color: rgb(6, 18, 39);
         color: #fff;
-        width: 420px;
+        width: 450px;
+        margin-left: 0px;
     }
 
     .contact, .tech, .soft, .lang{
         margin: 50px 0px 0px 40px;
-    }
-
-    .pst_wrk {
-        color: #FB6D3A;
     }
 
     .sidebar_title {
@@ -89,6 +130,8 @@
 
     .skills_item {
         color: #FB6D3A;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 
     .skills_item_text {
@@ -109,31 +152,31 @@
                 <h2 class="profession">{{profession}}</h2>
                 <h1 class="name">{{name_surname}}</h1>
                 <h4>{{country}}, {{city}}</h4>
-                <p>{{description}}</p>
+                <p class="description">{{description}}</p>
             </div>
             <!-- Projects -->
             <div class="projects">
-                <h3>Project</h3>
-                <ol>
+                <h3 class="main_title">Project</h3>
+                <ol class="projects_list">
                     {% for i in range(projects | length) %}
-                    <li class="li"><a href={{projects}}>{{projects[i]}}</a></li>
+                    <li class="li"><a class="des" href={{projects}}>{{projects[i]}}</a></li>
                     {% endfor %}
                 </ol>
             </div>
             <!-- Education-->
             <div class="education">
-                <h3>Education</h3>
-                <h4>{{education}}</h4>
+                <h3 class="main_title">Education</h3>
+                <h4 class="edu">{{education}}</h4>
             </div>
             <!-- Work experience -->
             <div class="experience">
-                <h3>Work Experience</h3>
+                <h3 class="main_title">Work Experience</h3>
                 <div>
                     <h4 class="pst_wrk">{{past_work}}</h4>
                     {% for a in range( how_long | length ) %}
                     <p>{{how_long[a]}}</p>
                     {% endfor %}
-                    <ul>
+                    <ul class='pst_wrk_list'>
                         {% for i in range(job_description | length) %}
                         <li class="li"> <span>{{job_description[i]}}</span></li>
                         {% endfor %}
