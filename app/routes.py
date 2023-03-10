@@ -1,28 +1,27 @@
 from app import app
-from flask import render_template
+from flask import render_template, redirect, url_for
 from .forms import LoginForm
 from app.main_db import readTable
 
-right_tuple = (198483175, 'Валерія Мацібура', '45672384023', 'lavireall@gmail.com', 'КНУ імені Тараса Шевченка', ['English', 'Franch', 'Ukrainian', 'German'], ['B2', 'A2', 'C2', 'A2'], 'UKRAINE',
-               'KYIV', 'Nema\n', '123123123', 'хочу працювати в компанії, яка займається нейронними мережами', 'Python Developer', ['friendlyness', 'teamwork', 'else'], ['Postgres', 'Python', 'Git',
- 'HTML'], ['link_on_project1', 'link_on_project2'], ['2009 - 2013'], ["В мої обов'язки входило під'єднувати бази даних до Python"])
+right_tuple = ''
 
 
-@app.route("/")
-@app.route("/index/")
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/index/", methods=['GET', 'POST'])
 def login():
     global right_tuple
     user = LoginForm()
     result = readTable()
-    for data_tuple in result:
-        if user.user_id in data_tuple:
-            right_tuple = data_tuple
+    if user.validate_on_submit():
+        for data_tuple in result:
+            if int(user.user_id.data) in data_tuple and data_tuple[10] == str(user.password.data):
+                right_tuple = data_tuple
+                return redirect(url_for('resume'))
     return render_template('login_form.html', user=user)
 
 
-
-@app.route("/Resume/")
-def index():
+@app.route("/resume", methods=['GET', 'POST'])
+def resume():
     profession = ''
     name_surname = ''
     phone_number = ''
