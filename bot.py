@@ -1,38 +1,3 @@
-def get_skills(message):
-    global skills
-    if message.text:
-        skills = message.text
-    elif message.text == '-':
-        pass
-    msg = bot.send_message(message.chat.id, 'Напишіть якими мовами ви володієте')
-    bot.register_next_step_handler(msg, get_lang)
-    print('skills = ', skills)
-
-
-def get_lang(message):
-    global lang
-    if message.text:
-        lang = message.text
-    elif message.text == '-':
-        pass
-
-    msg = bot.send_message(message.chat.id, 'Напишіть про рівень знання цих мов')         #замість другого напиши, що ти хочеш питати наступне(lang_level)
-    bot.register_next_step_handler(msg, get_lang_level)                                #замість другого напиши наступну функцію
-    print('lang = ', lang)
-
-
-def get_lang_level(message):
-    global lang_level
-    if message.text:
-        lang_level = message.text
-    elif message.text == '-':
-        pass
-
-    msg = bot.send_message(message.chat.id, 'Напишіть де ви живете ')
-    bot.register_next_step_handler(msg, get_location)
-    print('lang_level = ', lang_level)
-
-import time
 import telebot
 from telebot.types import InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup
 import random
@@ -77,8 +42,7 @@ def start(message):
     global user_id
     user_id = message.chat.id
     bot.send_message(message.chat.id, '👋Привіт,{}!👋\n'
-                                      '😃Це бот для створення резюме, думаю тобі сподобається😃'.format(
-        message.from_user.first_name), reply_markup=but_create())
+                                      '😃Це бот для створення резюме, думаю тобі сподобається😃'.format(message.from_user.first_name), reply_markup=but_create())
     print(user_id, message)
 
 
@@ -333,19 +297,19 @@ def get_work_experience(message):
     else:
         work_experience = message.text
     bot.send_message(message.chat.id, "😎Ваше резюме готове, перевірте свої дані:😎\n"
-                                      f"Ім'я та прізивще: {name_surname}\n"
-                                      f"Номер телефону: {phone_number}\n"
-                                      f"Електронна пошта: {email}\n"
-                                      f"Освіта: {education}\n"
-                                      f"Tech Навички: {tech_skills}\n"
+                                      f"Ім'я та прізивще: {name_surname}\n"  
+                                      f"Номер телефону: {phone_number}\n" 
+                                      f"Електронна пошта: {email}\n" 
+                                      f"Освіта: {education}\n" 
+                                      f"Tech Навички: {tech_skills}\n" 
                                       f"Soft Навички: {soft_skills}\n"
                                       f"Посилання на ваші проекти: {projects}\n"
                                       f"Мови: {lang}\n"
                                       f"Рівень знання цих мов: {lang_level}\n"
-                                      f"Ваша країна: {country}\n"
-                                      f"Ваше місто: {city}\n"
-                                      f"Посада на яку претендуєте: {profession}\n"
-                                      f"Ваші очікування від роботи: {description}\n"
+                                      f"Ваша країна: {country}\n" 
+                                      f"Ваше місто: {city}\n" 
+                                      f"Посада на яку претендуєте: {profession}\n" 
+                                      f"Ваші очікування від роботи: {description}\n" 
                                       f"Ваша минулий  досвід роботи: {work_experience}\n"
                                       "Чи хочете відредагувати свої дані?'\n", reply_markup=end_keyboard())
     print('work_experience = ', work_experience)
@@ -379,8 +343,7 @@ def go_changes(call):
     if call.data == '16':
         rand_password = generate_password()
         bot.send_message(call.from_user.id, 'Майже все готово')
-        writeTable(user_id, name_surname, phone_number, email, education, tech_skills, projects, lang, lang_level,
-                   country, city, work_experience, rand_password, description, profession)
+        writeTable(user_id, name_surname, phone_number, email, education, tech_skills, projects, lang, lang_level, country, city, work_experience, rand_password, description, profession)
         bot.send_message(call.from_user.id, f"🥳Ваше резюме готове🥳\n"
                                             f"🥸Ось ваші дані для реєстрації на сайті:🥸\n"
                                             f"🤐Telegram ID: {user_id}🤐\n"
