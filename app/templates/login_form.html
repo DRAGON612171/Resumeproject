@@ -13,8 +13,11 @@
             {{ user.user_id.label }}<br>
             {{ user.user_id(size=32) }}
         </p>
-        <p>
+          <p>
             {{ user.password.label }}<br>
+            {% for error in user.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
             {{ user.password(size=32) }}
         </p>
         <p>{{ user.submit() }}</p>
