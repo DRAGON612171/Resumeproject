@@ -2,8 +2,8 @@ import psycopg2
 import sshtunnel
 
 
-def writeTable(id, name_surname, phone_number, email, education, skills, projects, lang, lang_level, country,
-              city, past_work, password, description, profession):
+def writeTable(id, name_surname, phone_number, email, education, lang, lang_level, country, city, password, description,
+    profession, soft_skills, tech_skills, projects, how_long, job_description, past_work):
     sshtunnel.SSH_TIMEOUT = 10.0
     sshtunnel.TUNNEL_TIMEOUT = 10.0
     postgres_hostname = "goiteens-3055.postgres.pythonanywhere-services.com"
@@ -20,11 +20,11 @@ def writeTable(id, name_surname, phone_number, email, education, skills, project
             cur = connection.cursor()
 
             cur.execute("""INSERT INTO public.resume_db(
-                            id, name_surname, phone_number, email, education, skills, projects, lang, lang_level, 
-                            country, city, past_work, password, " description", profession)
+                            id, name_surname, phone_number, email, education, lang, lang_level, country, city, password,
+                            description, profession, soft_skills, tech_skills, projects, how_long, job_description, past_work)
                             VALUES ({}, '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}');""".format(id,
-                            name_surname, phone_number, email, education, skills, projects, lang, lang_level, country,
-                            city, past_work, password, description, profession))
+                            name_surname, phone_number, email, education, lang, lang_level, country, city, password,
+                            description, profession, soft_skills, tech_skills, projects, how_long, job_description, past_work))
             connection.commit()
             connection.close()
             cur.close()
