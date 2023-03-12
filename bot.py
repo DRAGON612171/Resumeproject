@@ -325,7 +325,6 @@ def get_how_long(message):
         bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
         update = False
     if message.text != '-' and not update:
-        pass
         how_long = message.text
         bot.send_message(message.chat.id, "😎Ваше резюме готове, перевірте свої дані:😎\n"
                                           f"Ім'я та прізивще: {name_surname}\n"
