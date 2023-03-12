@@ -60,215 +60,266 @@ def message_reply(message):
 
 def get_name_surname(message):
     global name_surname, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        bot.clear_step_handler(message)
-        start(message)
-        print(name_surname)
-    if update:
-        name_surname = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        name_surname = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть ваш номер телефону')
-    bot.register_next_step_handler(msg, get_phone_number)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            name_surname = message.text
+        msg = bot.send_message(message.chat.id, 'Напишіть ваш номер телефону')
+        bot.register_next_step_handler(msg, get_phone_number)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            name_surname = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('surname =', name_surname)
-
 
 def get_phone_number(message):
     global phone_number, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        bot.clear_step_handler(message)
-        start(message)
-    if update:
-        phone_number = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        phone_number = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть ваш email')
-    bot.register_next_step_handler(msg, get_email)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            phone_number = message.text
+        msg = bot.send_message(message.chat.id, 'Напишіть ваш email')
+        bot.register_next_step_handler(msg, get_email)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            phone_number = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('phone number = ', phone_number)
-
 
 def get_email(message):
     global email, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        email = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        email = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть про вашу освіту')
-    bot.register_next_step_handler(msg, get_education)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            email = message.text
+        msg = bot.send_message(message.chat.id, 'Напишіть про вашу освіту')
+        bot.register_next_step_handler(msg, get_education)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            email = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('email = ', email)
-
 
 def get_education(message):
     global education, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        education = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        education = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть про ваші Tech Skills')
-    bot.register_next_step_handler(msg, get_tech_skills)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            education = message.text
+        msg = bot.send_message(message.chat.id, 'Напишіть про ваші Tech Skills')
+        bot.register_next_step_handler(msg, get_tech_skills)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            education = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('education =', education)
-
 
 def get_tech_skills(message):
     global tech_skills, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        tech_skills = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        tech_skills = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть ваші Soft Skills')
-    bot.register_next_step_handler(msg, get_soft_skills)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            tech_skills = message.text
+        msg = bot.send_message(message.chat.id, 'Напишіть ваші Soft Skills')
+        bot.register_next_step_handler(msg, get_soft_skills)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            tech_skills = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('skills = ', tech_skills)
-
 
 def get_soft_skills(message):
     global soft_skills, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        soft_skills = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        soft_skills = message.text
-    msg = bot.send_message(message.chat.id, 'Вставте посилання на ваші проекти')
-    bot.register_next_step_handler(msg, get_projects)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            soft_skills = message.text
+        msg = bot.send_message(message.chat.id, 'Вставте посилання на ваші проекти')
+        bot.register_next_step_handler(msg, get_projects)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            soft_skills = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('soft_skills = ', soft_skills)
-
 
 def get_projects(message):
     global projects, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        projects = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        projects = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть якими мовами ви володієте')
-    bot.register_next_step_handler(msg, get_lang)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            projects = message.text
+        msg = bot.send_message(message.chat.id, 'Напишіть якими мовами ви володієте')
+        bot.register_next_step_handler(msg, get_lang)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            projects = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('projects = ', projects)
-
 
 def get_lang(message):
     global lang, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        lang = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        lang = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть про рівень знання цих мов')
-    bot.register_next_step_handler(msg, get_lang_level)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            lang = message.text
+        msg = bot.send_message(message.chat.id, 'Напишіть про рівень знання цих мов')
+        bot.register_next_step_handler(msg, get_lang_level)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            lang = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('lang = ', lang)
-
 
 def get_lang_level(message):
     global lang_level, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        lang_level = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        lang_level = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть в якій країні ви живете')
-    bot.register_next_step_handler(msg, get_country)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            lang_level = message.text
+        msg = bot.send_message(message.chat.id, 'Напишіть в якій країні ви живете')
+        bot.register_next_step_handler(msg, get_country)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            lang_level = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('lang_level = ', lang_level)
-
 
 def get_country(message):
     global country, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        country = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        country = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть в якому місті ви живете')
-    bot.register_next_step_handler(msg, get_city)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            country = message.text
+        msg = bot.send_message(message.chat.id, 'Напишіть в якому місті ви живете')
+        bot.register_next_step_handler(msg, get_city)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            country = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('country =', country)
-
 
 def get_city(message):
     global city, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        city = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        city = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть на яку посаду претендуєте')
-    bot.register_next_step_handler(msg, get_profession)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            city = message.text
+        msg = bot.send_message(message.chat.id, 'Напишіть на яку посаду претендуєте')
+        bot.register_next_step_handler(msg, get_profession)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            city = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('city =', city)
-
 
 def get_profession(message):
     global profession, update
     if not update:
-        if not update:
-            if message.text == '-':
-                pass
-            elif message.text == '/start':
-                start(message)
-            else:
-                profession = message.text
-                msg = bot.send_message(message.chat.id, 'Напиши свою професію')
-                bot.register_next_step_handler(msg, get_description)
-        elif update:
-            if message.text == '-':
-                pass
-            elif message.text == '/start':
-                start(message)
-            else:
-                profession = message.text
-                bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-                update = False
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            profession = message.text
+        msg = bot.send_message(message.chat.id, 'Напиши свою професію')
+        bot.register_next_step_handler(msg, get_description)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            profession = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('profession =', profession)
 
 
@@ -295,41 +346,49 @@ def get_description(message):
 
     print('description =', description)
 
-
 def get_work_experience(message):
     global work_experience, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        work_experience = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        work_experience = message.text
-    msg = bot.send_message(message.chat.id, 'Що ви робили на цій посаді?')
-    bot.register_next_step_handler(msg, get_job_description)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            work_experience = message.text
+        msg = bot.send_message(message.chat.id, 'Що ви робили на цій посаді?')
+        bot.register_next_step_handler(msg, get_job_description)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            work_experience = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
     print('work_experience =', work_experience)
-
 
 def get_job_description(message):
     global job_description, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        job_description = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        job_description = message.text
-    msg = bot.send_message(message.chat.id, 'Скільки часу ви займали цю посаду?')
-    bot.register_next_step_handler(msg, get_how_long)
-    print('job_description =',  job_description)
-
-
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            job_description = message.text
+        msg = bot.send_message(message.chat.id, 'Скільки часу ви займали цю посаду?')
+        bot.register_next_step_handler(msg, get_how_long)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            job_description = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
+    print('job_description =', job_description)
 
 def get_how_long(message):
     global how_long, update
