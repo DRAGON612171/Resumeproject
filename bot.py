@@ -233,18 +233,25 @@ def get_country(message):
 
 def get_city(message):
     global city, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        city = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        city = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть на яку посаду претендуєте')
-    bot.register_next_step_handler(msg, get_profession)
+    if not update:
+        if not update:
+            if message.text == '-':
+                pass
+            elif message.text == '/start':
+                start(message)
+            else:
+                city = message.text
+            msg = bot.send_message(message.chat.id, 'Напишіть на яку посаду претендуєте')
+            bot.register_next_step_handler(msg, get_profession)
+        elif update:
+            if message.text == '-':
+                pass
+            elif message.text == '/start':
+                start(message)
+            else:
+                city = message.text
+                bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+                update = False
     print('city =', city)
 
 
