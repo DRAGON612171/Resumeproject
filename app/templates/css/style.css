@@ -47,3 +47,9 @@ li{
     line-height: 24px;
     margin-right: 5px;
 }
+.form-styles{
+    color: aqua;
+}
+.background-styles{
+    background-color: burlywood;
+}
