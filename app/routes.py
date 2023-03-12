@@ -14,7 +14,7 @@ def login():
     result = readTable()
     if user.validate_on_submit():
         for data_tuple in result:
-            if int(user.user_id.data) in data_tuple and data_tuple[10] == str(user.password.data):
+            if int(user.user_id.data) in data_tuple and data_tuple[9] == str(user.password.data):
                 right_tuple = data_tuple
                 return redirect(url_for('resume'))
     return render_template('login_form.html', user=user)
