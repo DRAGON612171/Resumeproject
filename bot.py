@@ -258,8 +258,8 @@ def get_profession(message):
                 start(message)
             else:
                 profession = message.text
-                msg = bot.send_message(message.chat.id, 'Напиши свою професію')
-                bot.register_next_step_handler(msg, get_description)
+            msg = bot.send_message(message.chat.id, 'Напиши свою професію')
+            bot.register_next_step_handler(msg, get_description)
         elif update:
             if message.text == '-':
                 pass
