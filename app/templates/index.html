@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <style>
     body{
@@ -166,7 +166,9 @@
             <div class="experience">
                 <h3 class="main_title">Work Experience</h3>
                 <div>
-                    <h4 class="pst_wrk">{{past_work}}</h4>
+                    {% for a in range( past_work | length ) %}
+                    <h4 class="pst_wrk">{{past_work[a]}}</h4>
+                    {% endfor %}
                     {% for a in range( how_long | length ) %}
                     <p>{{how_long[a]}}</p>
                     {% endfor %}
