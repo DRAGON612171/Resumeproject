@@ -22,6 +22,8 @@ work_experience = ''
 user_id = ''
 rand_password = ''
 description = ''
+how_long = ''
+job_description = ''
 update = False
 
 
@@ -275,9 +277,74 @@ def get_description(message):
         update = False
     else:
         description = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть про ваш минулий досвід роботи')
+    msg = bot.send_message(message.chat.id, 'Напишіть про ваш минулий досвід роботи?')
     bot.register_next_step_handler(msg, get_work_experience)
     print('description =', description)
+
+
+def get_work_experience(message):
+    global work_experience, update
+    if message.text == '-' and not update:
+        pass
+    elif message.text == '/start':
+        start(message)
+    if update:
+        work_experience = message.text
+        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+        update = False
+    else:
+        work_experience = message.text
+    msg = bot.send_message(message.chat.id, 'Що ви робили на цій посаді?')
+    bot.register_next_step_handler(msg, get_job_description)
+    print('work_experience =', work_experience)
+
+
+def get_job_description(message):
+    global job_description, update
+    if message.text == '-' and not update:
+        pass
+    elif message.text == '/start':
+        start(message)
+    if update:
+        job_description = message.text
+        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+        update = False
+    else:
+        job_description = message.text
+    msg = bot.send_message(message.chat.id, 'Скільки часу ви займали цю посаду?')
+    bot.register_next_step_handler(msg, get_work_experience)
+    print('job_description =',  get_how_long)
+
+
+def get_how_long(message):
+    global how_long, update
+    if message.text == '-' and not update:
+        pass
+    elif message.text == '/start':
+        start(message)
+    if update:
+        how_long = message.text
+        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+        update = False
+    else:
+        how_long = message.text
+        bot.send_message(message.chat.id, "😎Ваше резюме готове, перевірте свої дані:😎\n"
+                                          f"Ім'я та прізивще: {name_surname}\n"
+                                          f"Номер телефону: {phone_number}\n"
+                                          f"Електронна пошта: {email}\n"
+                                          f"Освіта: {education}\n"
+                                          f"Tech Навички: {tech_skills}\n"
+                                          f"Soft Навички: {soft_skills}\n"
+                                          f"Посилання на ваші проекти: {projects}\n"
+                                          f"Мови: {lang}\n"
+                                          f"Рівень знання цих мов: {lang_level}\n"
+                                          f"Ваша країна: {country}\n"
+                                          f"Ваше місто: {city}\n"
+                                          f"Посада на яку претендуєте: {profession}\n"
+                                          f"Ваші очікування від роботи: {description}\n"
+                                          f"Ваша минулий  досвід роботи: {work_experience}\n"
+                                          "Чи хочете відредагувати свої дані?'\n", reply_markup=end_keyboard())
+    print('how_long =',  how_long)
 
 
 def end_keyboard():
@@ -286,33 +353,6 @@ def end_keyboard():
     but2 = InlineKeyboardButton('Ні', callback_data='16')
     markup.add(but1, but2)
     return markup
-
-
-def get_work_experience(message):
-    global work_experience, update
-    if message.text == '-' and not update:
-        bot.send_message(message.chat.id, 'Напишіть про вашу минулу роботу')
-    elif message.text == '/start':
-        start(message)
-    else:
-        work_experience = message.text
-    bot.send_message(message.chat.id, "😎Ваше резюме готове, перевірте свої дані:😎\n"
-                                      f"Ім'я та прізивще: {name_surname}\n"  
-                                      f"Номер телефону: {phone_number}\n" 
-                                      f"Електронна пошта: {email}\n" 
-                                      f"Освіта: {education}\n" 
-                                      f"Tech Навички: {tech_skills}\n" 
-                                      f"Soft Навички: {soft_skills}\n"
-                                      f"Посилання на ваші проекти: {projects}\n"
-                                      f"Мови: {lang}\n"
-                                      f"Рівень знання цих мов: {lang_level}\n"
-                                      f"Ваша країна: {country}\n" 
-                                      f"Ваше місто: {city}\n" 
-                                      f"Посада на яку претендуєте: {profession}\n" 
-                                      f"Ваші очікування від роботи: {description}\n" 
-                                      f"Ваша минулий  досвід роботи: {work_experience}\n"
-                                      "Чи хочете відредагувати свої дані?'\n", reply_markup=end_keyboard())
-    print('work_experience = ', work_experience)
 
 
 def changes():
