@@ -250,35 +250,49 @@ def get_city(message):
 
 def get_profession(message):
     global profession, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        profession = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        profession = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть ваші очікування від роботи')
-    bot.register_next_step_handler(msg, get_description)
+    if not update:
+        if not update:
+            if message.text == '-':
+                pass
+            elif message.text == '/start':
+                start(message)
+            else:
+                profession = message.text
+                msg = bot.send_message(message.chat.id, 'Напиши свою професію')
+                bot.register_next_step_handler(msg, get_description)
+        elif update:
+            if message.text == '-':
+                pass
+            elif message.text == '/start':
+                start(message)
+            else:
+                profession = message.text
+                bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+                update = False
     print('profession =', profession)
 
 
 def get_description(message):
     global description, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
-        start(message)
-    if update:
-        description = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
-    else:
-        description = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть про ваш минулий досвід роботи?')
-    bot.register_next_step_handler(msg, get_work_experience)
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            description = message.text
+        msg = bot.send_message(message.chat.id, 'Напишіть про ваш минулий досвід роботи?')
+        bot.register_next_step_handler(msg, get_work_experience)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            description = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
+
     print('description =', description)
 
 
@@ -314,6 +328,7 @@ def get_job_description(message):
     msg = bot.send_message(message.chat.id, 'Скільки часу ви займали цю посаду?')
     bot.register_next_step_handler(msg, get_how_long)
     print('job_description =',  job_description)
+
 
 
 def get_how_long(message):
