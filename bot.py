@@ -124,7 +124,7 @@ def get_education(message):
         update = False
     else:
         education = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть про ваші навички')
+    msg = bot.send_message(message.chat.id, 'Напишіть про ваші Tech Skills')
     bot.register_next_step_handler(msg, get_tech_skills)
     print('education =', education)
 
@@ -141,7 +141,7 @@ def get_tech_skills(message):
         update = False
     else:
         tech_skills = message.text
-    msg = bot.send_message(message.chat.id, 'Вставте посилання на ваші проекти')
+    msg = bot.send_message(message.chat.id, 'Напишіть ваші Soft Skills')
     bot.register_next_step_handler(msg, get_soft_skills)
     print('skills = ', tech_skills)
 
@@ -312,21 +312,20 @@ def get_job_description(message):
     else:
         job_description = message.text
     msg = bot.send_message(message.chat.id, 'Скільки часу ви займали цю посаду?')
-    bot.register_next_step_handler(msg, get_work_experience)
-    print('job_description =',  get_how_long)
+    bot.register_next_step_handler(msg, get_how_long)
+    print('job_description =',  job_description)
 
 
 def get_how_long(message):
     global how_long, update
-    if message.text == '-' and not update:
-        pass
-    elif message.text == '/start':
+    if message.text == '/start':
         start(message)
     if update:
         how_long = message.text
         bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
         update = False
-    else:
+    if message.text != '-' and not update:
+        pass
         how_long = message.text
         bot.send_message(message.chat.id, "😎Ваше резюме готове, перевірте свої дані:😎\n"
                                           f"Ім'я та прізивще: {name_surname}\n"
@@ -343,6 +342,8 @@ def get_how_long(message):
                                           f"Посада на яку претендуєте: {profession}\n"
                                           f"Ваші очікування від роботи: {description}\n"
                                           f"Ваша минулий  досвід роботи: {work_experience}\n"
+                                          f"Що ви робили на цій посаді: {job_description}\n"
+                                          f"Скільки часу ви займали цю посаду: {how_long}\n"
                                           "Чи хочете відредагувати свої дані?'\n", reply_markup=end_keyboard())
     print('how_long =',  how_long)
 
@@ -371,7 +372,9 @@ def changes():
     but11 = InlineKeyboardButton("👨‍🎓Професія👨‍🎓", callback_data='11')
     but12 = InlineKeyboardButton("😱Очікування😱", callback_data='12')
     but13 = InlineKeyboardButton("🤯Досвід роботи🤯", callback_data='13')
-    markup.add(but1, but2, but3, but4, but5, but6, but7, but8, but9, but10, but11, but12, but13, but14)
+    but17 = InlineKeyboardButton("😱Ваша робота на минулій посаді😱", callback_data='17')
+    but18 = InlineKeyboardButton("🤯Термін вашої минулої роботи🤯", callback_data='18')
+    markup.add(but1, but2, but3, but4, but5, but6, but7, but8, but9, but10, but11, but12, but13, but14, but17, but18)
     return markup
 
 
@@ -444,6 +447,14 @@ def go_changes(call):
         update = True
         msg = bot.send_message(call.from_user.id, 'Напишіть про ваші Soft навички')
         bot.register_next_step_handler(msg, get_soft_skills)
+    elif call.data == '17':
+        update = True
+        msg = bot.send_message(call.from_user.id, 'Що ви робили на цій посаді')
+        bot.register_next_step_handler(msg, get_job_description)
+    if call.data == '18':
+        update = True
+        msg = bot.send_message(call.from_user.id, 'Скільки часу ви займали цю посаду?')
+        bot.register_next_step_handler(msg, get_how_long)
 
 
 bot.polling(none_stop=True)
