@@ -1,12 +1,27 @@
 from app import app
-from flask import render_template
-
+from flask import render_template, redirect, url_for
+from .forms import LoginForm
 from app.main_db import readTable
 
+right_tuple = ''
 
-@app.route("/")
-@app.route("/index/")
-def index():
+
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/index/", methods=['GET', 'POST'])
+def login():
+    global right_tuple
+    user = LoginForm()
+    result = readTable()
+    if user.validate_on_submit():
+        for data_tuple in result:
+            if int(user.user_id.data) in data_tuple and data_tuple[9] == str(user.password.data):
+                right_tuple = data_tuple
+                return redirect(url_for('resume'))
+    return render_template('login_form.html', user=user)
+
+
+@app.route("/resume", methods=['GET', 'POST'])
+def resume():
     profession = ''
     name_surname = ''
     phone_number = ''
@@ -25,38 +40,25 @@ def index():
     def portal():
         nonlocal name_surname, phone_number, email, education, tech_skills, soft_skills, projects, lang, lang_level, \
                             country, city, past_work, description, profession, how_long, job_description
-        result = readTable()
-        name_surname = result[0][1]
-        phone_number = result[0][2]
-        email = result[0][3]
-        education = result[0][4]
-        lang = result[0][5]
-        lang_level = result[0][6]
-        country = result[0][7]
-        city = result[0][8]
-        description = result[0][10]
-        profession = result[0][11]
-        past_work = result[0][-1]
-        job_description = result[0][-2]
-        how_long = result[0][-3]
-        projects = result[0][-4]
-        tech_skills = result[0][-5]
-        soft_skills = result[0][-6]
-
-    def another_past_work():
-        return """<div>
-                    <h4 class="pst_wrk">{{past_work}}</h4>
-                    {% for a in range( how_long | length ) %}
-                    <p>{{how_long[a]}}</p>
-                    {% endfor %}
-                    <ul class='pst_wrk_list'>
-                        {% for i in range(job_description | length) %}
-                        <li class="li"> <span>{{job_description[i]}}</span></li>
-                        {% endfor %}
-                    </ul>
-                </div>"""
+        profession = right_tuple[12]
+        name_surname = right_tuple[1]
+        phone_number = right_tuple[2]
+        email = right_tuple[3]
+        education = right_tuple[4]
+        tech_skills = right_tuple[-4]
+        soft_skills = right_tuple[-5]
+        projects = right_tuple[-3]
+        lang = right_tuple[5]
+        lang_level = right_tuple[6]
+        country = right_tuple[7]
+        city = right_tuple[8]
+        past_work = right_tuple[9]
+        how_long = right_tuple[-2]
+        job_description = right_tuple[-1]
+        description = right_tuple[11]
 
     portal()
+
     return render_template('index.html', profession=profession, name_surname=name_surname, phone_number=phone_number,
                            email=email, education=education, tech_skills=tech_skills, soft_skills=soft_skills,
                            projects=projects, lang=lang, lang_level=lang_level, country=country, city=city,
