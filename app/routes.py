@@ -1,7 +1,7 @@
 from app import app
 from flask import render_template, redirect, url_for
 from .forms import LoginForm
-from app.main_db import readTable
+from .main_db import readTable
 
 right_tuple = ''
 
@@ -40,22 +40,22 @@ def resume():
     def portal():
         nonlocal name_surname, phone_number, email, education, tech_skills, soft_skills, projects, lang, lang_level, \
                             country, city, past_work, description, profession, how_long, job_description
-        profession = right_tuple[12]
         name_surname = right_tuple[1]
         phone_number = right_tuple[2]
         email = right_tuple[3]
         education = right_tuple[4]
-        tech_skills = right_tuple[-4]
-        soft_skills = right_tuple[-5]
-        projects = right_tuple[-3]
         lang = right_tuple[5]
         lang_level = right_tuple[6]
         country = right_tuple[7]
         city = right_tuple[8]
-        past_work = right_tuple[9]
-        how_long = right_tuple[-2]
-        job_description = right_tuple[-1]
-        description = right_tuple[11]
+        description = right_tuple[10]
+        profession = right_tuple[11]
+        past_work = right_tuple[-1]
+        job_description = right_tuple[-2]
+        how_long = right_tuple[-3]
+        projects = right_tuple[-4]
+        tech_skills = right_tuple[-5]
+        soft_skills = right_tuple[-6]
 
     portal()
 
