@@ -122,7 +122,7 @@ def get_education(message):
         update = False
     else:
         education = message.text
-    msg = bot.send_message(message.chat.id, 'Напишіть про ваші навички')
+    msg = bot.send_message(message.chat.id, 'Напишіть ваші tech skills')
     bot.register_next_step_handler(msg, get_tech_skills)
     print('education =', education)
 
@@ -139,7 +139,7 @@ def get_tech_skills(message):
         update = False
     else:
         tech_skills = message.text
-    msg = bot.send_message(message.chat.id, 'Вставте посилання на ваші проекти')
+    msg = bot.send_message(message.chat.id, 'Напишіть ваші soft skills')
     bot.register_next_step_handler(msg, get_soft_skills)
     print('skills = ', tech_skills)
 

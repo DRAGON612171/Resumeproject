@@ -165,19 +165,15 @@
             <!-- Work experience -->
             <div class="experience">
                 <h3 class="main_title">Work Experience</h3>
+                {% for i in range( how_long | length ) %}
                 <div>
-                    {% for a in range( past_work | length ) %}
-                    <h4 class="pst_wrk">{{past_work[a]}}</h4>
-                    {% endfor %}
-                    {% for a in range( how_long | length ) %}
-                    <p>{{how_long[a]}}</p>
-                    {% endfor %}
+                    <h4 class="pst_wrk">{{past_work[i]}}</h4>
+                    <p>{{how_long[i]}}</p>
                     <ul class='pst_wrk_list'>
-                        {% for i in range(job_description | length) %}
                         <li class="li"> <span>{{job_description[i]}}</span></li>
-                        {% endfor %}
                     </ul>
                 </div>
+                {% endfor %}
             </div>
         </div>
         <aside class="sidebar">
