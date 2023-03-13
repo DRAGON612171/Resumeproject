@@ -25,6 +25,7 @@ def writeTable(id, name_surname, phone_number, email, education, lang, lang_leve
                             VALUES ({}, '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}');""".format(id,
                             name_surname, phone_number, email, education, lang, lang_level, country, city, password,
                             description, profession, soft_skills, tech_skills, projects, how_long, job_description, past_work))
+
             connection.commit()
             connection.close()
             cur.close()

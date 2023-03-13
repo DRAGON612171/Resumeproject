@@ -64,3 +64,4 @@ def resume():
                            projects=projects, lang=lang, lang_level=lang_level, country=country, city=city,
                            past_work=past_work, how_long=how_long, job_description=job_description, description=description)
 
+
