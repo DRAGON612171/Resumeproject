@@ -281,6 +281,7 @@ def get_country(message):
 def get_city(message):
     global city, update
     if not update:
+<<<<<<< HEAD
         if message.text == '-':
             pass
         elif message.text == '/start':
@@ -298,11 +299,32 @@ def get_city(message):
             city = message.text
             bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
             update = False
+=======
+        if not update:
+            if message.text == '-':
+                pass
+            elif message.text == '/start':
+                start(message)
+            else:
+                city = message.text
+            msg = bot.send_message(message.chat.id, 'Напишіть на яку посаду претендуєте')
+            bot.register_next_step_handler(msg, get_profession)
+        elif update:
+            if message.text == '-':
+                pass
+            elif message.text == '/start':
+                start(message)
+            else:
+                city = message.text
+                bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+                update = False
+>>>>>>> ab4258ffbb464b35974256dfdf40a0303b3479d5
     print('city =', city)
 
 def get_profession(message):
     global profession, update
     if not update:
+<<<<<<< HEAD
         if message.text == '-':
             pass
         elif message.text == '/start':
@@ -320,6 +342,26 @@ def get_profession(message):
             profession = message.text
             bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
             update = False
+=======
+        if not update:
+            if message.text == '-':
+                pass
+            elif message.text == '/start':
+                start(message)
+            else:
+                profession = message.text
+            msg = bot.send_message(message.chat.id, 'Напиши свою професію')
+            bot.register_next_step_handler(msg, get_description)
+        elif update:
+            if message.text == '-':
+                pass
+            elif message.text == '/start':
+                start(message)
+            else:
+                profession = message.text
+                bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+                update = False
+>>>>>>> ab4258ffbb464b35974256dfdf40a0303b3479d5
     print('profession =', profession)
 
 
