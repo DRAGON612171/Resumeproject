@@ -331,7 +331,7 @@ def get_profession(message):
             start(message)
         else:
             profession = message.text
-        msg = bot.send_message(message.chat.id, 'Напиши свою професію')
+        msg = bot.send_message(message.chat.id, 'Напишіть, що ви хочете отримати від роботи(можете ще написати інші факти про себе)')
         bot.register_next_step_handler(msg, get_description)
     elif update:
         if message.text == '-':
@@ -354,7 +354,7 @@ def get_description(message):
             start(message)
         else:
             description = message.text
-        msg = bot.send_message(message.chat.id, 'Напишіть про ваш минулий досвід роботи?', reply_markup=next_step_but7())
+        msg = bot.send_message(message.chat.id, 'Напишіть назву вашою минулої посади')
         bot.register_next_step_handler(msg, get_work_experience)
     elif update:
         if message.text == '-':
@@ -380,7 +380,8 @@ def get_work_experience(message):
                 start(message)
             else:
                 work_experience.append(message.text)
-            bot.register_next_step_handler(bot.send_message(message.chat.id, 'Введіть наступний пункт'), get_work_experience)
+            msg = bot.send_message(message.chat.id, 'Введіть, що робили на цій роботі')
+            bot.register_next_step_handler(msg, get_job_description)
         elif update:
             if message.text == '-':
                 pass
@@ -404,7 +405,7 @@ def get_job_description(message):
                 start(message)
             else:
                 job_description.append(message.text)
-            bot.register_next_step_handler(bot.send_message(message.chat.id, 'Скільки часу ви займали цю посаду?'), get_job_description)
+            bot.register_next_step_handler(bot.send_message(message.chat.id, 'Скільки часу ви займали цю посаду?'), get_how_long)
         elif update:
             if message.text == '-':
                 pass
@@ -419,13 +420,27 @@ def get_job_description(message):
 
 
 def get_how_long(message):
-    global how_long, update
-    if message.text == '/start':
-        start(message)
-    if update:
-        how_long = message.text
-        bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-        update = False
+    global how_long, update, next_step
+    if not update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            how_long.append(message.text)
+        msg = bot.send_message(message.chat.id, 'Скільки часу ви займали цю посаду?')
+        bot.register_next_step_handler(msg, get_how_long)
+    elif update:
+        if message.text == '-':
+            pass
+        elif message.text == '/start':
+            start(message)
+        else:
+            how_long = message.text
+            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+            update = False
+
+
     if message.text != '-' and not update:
         how_long = message.text
         bot.send_message(message.chat.id, "😎Ваше резюме готове, перевірте свої дані:😎\n"
@@ -633,22 +648,22 @@ def go_changes(call):
         msg = bot.send_message(call.from_user.id, 'Напишіть якими мовами ви володієте', reply_markup=next_step_but5())
         bot.clear_step_handler(msg)
         bot.register_next_step_handler(msg, get_lang)
-    # elif call.data == '24':
-    #     msg = bot.send_message(call.from_user.id, 'Напишіть про рівень знання цих мов', reply_markup=next_step_but6())
+    # # elif call.data == '24':
+    # #     msg = bot.send_message(call.from_user.id, 'Напишіть про рівень знання цих мов', reply_markup=next_step_but6())
+    # #     bot.clear_step_handler(msg)
+    # #     bot.register_next_step_handler(msg, get_lang_level)
+    # if call.data == '25':
+    #     msg = bot.send_message(call.from_user.id, 'Напишіть в якій країні ви живете', )
     #     bot.clear_step_handler(msg)
-    #     bot.register_next_step_handler(msg, get_lang_level)
-    if call.data == '25':
-        msg = bot.send_message(call.from_user.id, 'Напишіть в якій країні ви живете', )
-        bot.clear_step_handler(msg)
-        bot.register_next_step_handler(msg, get_country)
-    elif call.data == '26':
-        msg = bot.send_message(call.from_user.id, 'Що ви робили на цій посаді?', reply_markup=next_step_but8())
-        bot.clear_step_handler(msg)
-        bot.register_next_step_handler(msg, get_job_description)
-    if call.data == '27':
-        msg = bot.send_message(call.from_user.id, 'Скільки часу ви займали цю посаду?', reply_markup=next_step_but8())
-        bot.clear_step_handler(msg)
-        bot.register_next_step_handler(msg, get_how_long)
+    #     bot.register_next_step_handler(msg, get_country)
+    # elif call.data == '26':
+    #     msg = bot.send_message(call.from_user.id, 'Що ви робили на цій посаді?', reply_markup=next_step_but8())
+    #     bot.clear_step_handler(msg)
+    #     bot.register_next_step_handler(msg, get_job_description)
+    # if call.data == '27':
+    #     msg = bot.send_message(call.from_user.id, 'Скільки часу ви займали цю посаду?', reply_markup=next_step_but8())
+    #     bot.clear_step_handler(msg)
+    #     bot.register_next_step_handler(msg, get_how_long)
 
 
 bot.polling(none_stop=True)

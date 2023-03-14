@@ -6,17 +6,9 @@
 </head>
 <body>
     <style>
-<<<<<<< HEAD
-        <!DOCTYPE html>
-<html lang="en" class="background-styles">
-<head>
-    <meta charset="UTF-8">
-    <title>Resume</title>
-</head>
-<body>
-    <style>
         body {
-            background-color: #f7f7f7;
+            background: url(static/preview.gif) center / cover;
+            background-position: center center;
             color: #333;
             font-family: Arial, sans-serif;
             font-size: 1rem;
@@ -55,19 +47,19 @@
             color: #333;
         }
         input[type="submit"] {
+            transition: .5s;
             border: none;
             border-radius: 3px;
-            color: #fff;
+            background-color: rgb(6, 18, 39);
             cursor: pointer;
             padding: 0.5rem 1rem;
             font-size: 1rem;
             margin-top: 1rem;
+            color: #fff;
         }
-=======
->>>>>>> 6e436fef42ccd57ed8d9ccb43a41c278f058ce53
-        .background-styles{
-            background-image: url(./css/2023-03-14\ 19.14.49.jpg);
-            background-size: cover;
+        input[type=submit]:hover {
+            background-color: #FB6D3A;
+        }
         }
         .form-styles{
             background-color: white;
@@ -79,17 +71,10 @@
             background-color: darkorange;
         }
         .btn-styles:hover{
-<<<<<<< HEAD
             background-color: gray;
         }
         .btn-styles:focus{
             background-color: gray;
-=======
-            background-color: pink;
-        }
-        .btn-styles:focus{
-            background-color: pink;
->>>>>>> 6e436fef42ccd57ed8d9ccb43a41c278f058ce53
         }
     </style>
     <h1 class="text-styles">Sign In</h1>
@@ -107,7 +92,7 @@
             {% endfor %}
             {{ user.password(size=32) }}
         </p>
-        <p class="btn-styles">{{ user.submit() }}</p>
+        <p>{{ user.submit() }}</p>
     </form>
 </body>
 </html>
