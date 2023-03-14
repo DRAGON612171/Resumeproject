@@ -354,7 +354,7 @@ def get_description(message):
             start(message)
         else:
             description = message.text
-        msg = bot.send_message(message.chat.id, 'Напишіть назву вашою минулої посади')
+        msg = bot.send_message(message.chat.id, 'Напишіть назву вашою минулої посади', reply_markup=next_step_but7())
         bot.register_next_step_handler(msg, get_work_experience)
     elif update:
         if message.text == '-':
@@ -421,47 +421,26 @@ def get_job_description(message):
 
 def get_how_long(message):
     global how_long, update, next_step
-    if not update:
-        if message.text == '-':
-            pass
-        elif message.text == '/start':
-            start(message)
-        else:
-            how_long.append(message.text)
-        msg = bot.send_message(message.chat.id, 'Скільки часу ви займали цю посаду?')
-        bot.register_next_step_handler(msg, get_how_long)
-    elif update:
-        if message.text == '-':
-            pass
-        elif message.text == '/start':
-            start(message)
-        else:
-            how_long = message.text
-            bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
-            update = False
-
-
-    if message.text != '-' and not update:
-        how_long = message.text
-        bot.send_message(message.chat.id, "😎Ваше резюме готове, перевірте свої дані:😎\n"
-                                          f"Ім'я та прізивще: {name_surname}\n"
-                                          f"Номер телефону: {phone_number}\n"
-                                          f"Електронна пошта: {email}\n"
-                                          f"Освіта: {education}\n"
-                                          f"Tech Навички: {tech_skills}\n"
-                                          f"Soft Навички: {soft_skills}\n"
-                                          f"Посилання на ваші проекти: {projects}\n"
-                                          f"Мови: {lang}\n"
-                                          f"Рівень знання цих мов: {lang_level}\n"
-                                          f"Ваша країна: {country}\n"
-                                          f"Ваше місто: {city}\n"
-                                          f"Посада на яку претендуєте: {profession}\n"
-                                          f"Ваші очікування від роботи: {description}\n"
-                                          f"Ваша минулий  досвід роботи: {work_experience}\n"
-                                          f"Що ви робили на цій посаді: {job_description}\n"
-                                          f"Скільки часу ви займали цю посаду: {how_long}\n"
-                                          "Чи хочете відредагувати свої дані?'\n", reply_markup=end_keyboard())
-    print('how_long =',  how_long)
+    if not next_step:
+        if not update:
+            if message.text == '-':
+                pass
+            elif message.text == '/start':
+                start(message)
+            else:
+                how_long.append(message.text)
+            msg = bot.send_message(message.chat.id, 'Напишіть наступний пункт')
+            bot.register_next_step_handler(msg, get_work_experience)
+        elif update:
+            if message.text == '-':
+                pass
+            elif message.text == '/start':
+                start(message)
+            else:
+                how_long = message.text
+                bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
+                update = False
+    print('how_long =', how_long)
 
 
 def next_step_but():
@@ -488,13 +467,6 @@ def next_step_but3():
 def next_step_but4():
     markup = InlineKeyboardMarkup(row_width=1)
     but = InlineKeyboardButton('Продовжити опитування', callback_data='23')
-    markup.add(but)
-    return markup
-
-
-def next_step_but5():
-    markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='24')
     markup.add(but)
     return markup
 
@@ -557,8 +529,7 @@ def go_changes(call):
         bot.send_message(call.from_user.id, 'Що бажаєте змінити?', reply_markup=changes())
     if call.data == '16':
         rand_password = generate_password()
-        bot.send_message(call.from_user.id, 'Майже все готово')
-        writeTable(id, name_surname, phone_number, email, education, lang, lang_level, country, city, rand_password,
+        writeTable(user_id, name_surname, phone_number, email, education, lang, lang_level, country, city, rand_password,
                 description, profession, soft_skills, tech_skills, projects, how_long, job_description, work_experience)
         bot.send_message(call.from_user.id, f"🥳Ваше резюме готове🥳\n"
                                             f"🥸Ось ваші дані для реєстрації на сайті:🥸\n"
@@ -645,25 +616,34 @@ def go_changes(call):
         bot.register_next_step_handler(msg, get_projects)
     if call.data == '23':
         next_step = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть якими мовами ви володієте', reply_markup=next_step_but5())
+        msg = bot.send_message(call.from_user.id, 'Напишіть якими мовами ви володієте', reply_markup=next_step_but6())
         bot.clear_step_handler(msg)
         bot.register_next_step_handler(msg, get_lang)
-    # # elif call.data == '24':
-    # #     msg = bot.send_message(call.from_user.id, 'Напишіть про рівень знання цих мов', reply_markup=next_step_but6())
-    # #     bot.clear_step_handler(msg)
-    # #     bot.register_next_step_handler(msg, get_lang_level)
-    # if call.data == '25':
-    #     msg = bot.send_message(call.from_user.id, 'Напишіть в якій країні ви живете', )
-    #     bot.clear_step_handler(msg)
-    #     bot.register_next_step_handler(msg, get_country)
-    # elif call.data == '26':
-    #     msg = bot.send_message(call.from_user.id, 'Що ви робили на цій посаді?', reply_markup=next_step_but8())
-    #     bot.clear_step_handler(msg)
-    #     bot.register_next_step_handler(msg, get_job_description)
-    # if call.data == '27':
-    #     msg = bot.send_message(call.from_user.id, 'Скільки часу ви займали цю посаду?', reply_markup=next_step_but8())
-    #     bot.clear_step_handler(msg)
-    #     bot.register_next_step_handler(msg, get_how_long)
+    elif call.data == '26':
+        bot.send_message(call.from_user.id, "😎Ваше резюме готове, перевірте свої дані:😎\n"
+                                          f"Ім'я та прізивще: {name_surname}\n"
+                                          f"Номер телефону: {phone_number}\n"
+                                          f"Електронна пошта: {email}\n"
+                                          f"Освіта: {education}\n"
+                                          f"Tech Навички: {tech_skills}\n"
+                                          f"Soft Навички: {soft_skills}\n"
+                                          f"Посилання на ваші проекти: {projects}\n"
+                                          f"Мови: {lang}\n"
+                                          f"Рівень знання цих мов: {lang_level}\n"
+                                          f"Ваша країна: {country}\n"
+                                          f"Ваше місто: {city}\n"
+                                          f"Посада на яку претендуєте: {profession}\n"
+                                          f"Ваші очікування від роботи: {description}\n"
+                                          f"Ваша минулий  досвід роботи: {work_experience}\n"
+                                          f"Що ви робили на цій посаді: {job_description}\n"
+                                          f"Скільки часу ви займали цю посаду: {how_long}\n"
+                                          "Чи хочете відредагувати свої дані?'\n", reply_markup=end_keyboard())
+
+    if call.data == '25':
+        next_step = True
+        msg = bot.send_message(call.from_user.id, 'Напишіть з якої ви країни')
+        bot.clear_step_handler(msg)
+        bot.register_next_step_handler(msg, get_country)
 
 
 bot.polling(none_stop=True)
