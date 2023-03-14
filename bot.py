@@ -455,11 +455,13 @@ def next_step_but():
     markup.add(but)
     return markup
 
+
 def next_step_but2():
     markup = InlineKeyboardMarkup(row_width=1)
     but = InlineKeyboardButton('Продовжити опитування', callback_data='21')
     markup.add(but)
     return markup
+
 
 def next_step_but3():
     markup = InlineKeyboardMarkup(row_width=1)
@@ -467,11 +469,13 @@ def next_step_but3():
     markup.add(but)
     return markup
 
+
 def next_step_but4():
     markup = InlineKeyboardMarkup(row_width=1)
     but = InlineKeyboardButton('Продовжити опитування', callback_data='23')
     markup.add(but)
     return markup
+
 
 def next_step_but5():
     markup = InlineKeyboardMarkup(row_width=1)
@@ -479,17 +483,20 @@ def next_step_but5():
     markup.add(but)
     return markup
 
+
 def next_step_but6():
     markup = InlineKeyboardMarkup(row_width=1)
     but = InlineKeyboardButton('Продовжити опитування', callback_data='25')
     markup.add(but)
     return markup
 
+
 def next_step_but7():
     markup = InlineKeyboardMarkup(row_width=1)
     but = InlineKeyboardButton('Продовжити опитування', callback_data='26')
     markup.add(but)
     return markup
+
 
 def next_step_but8():
     markup = InlineKeyboardMarkup(row_width=1)
@@ -536,7 +543,8 @@ def go_changes(call):
     if call.data == '16':
         rand_password = generate_password()
         bot.send_message(call.from_user.id, 'Майже все готово')
-        writeTable(user_id, name_surname, phone_number, email, education, tech_skills, projects, lang, lang_level, country, city, work_experience, rand_password, description, profession)
+        writeTable(id, name_surname, phone_number, email, education, lang, lang_level, country, city, rand_password,
+                description, profession, soft_skills, tech_skills, projects, how_long, job_description, work_experience)
         bot.send_message(call.from_user.id, f"🥳Ваше резюме готове🥳\n"
                                             f"🥸Ось ваші дані для реєстрації на сайті:🥸\n"
                                             f"🤐Telegram ID: {user_id}🤐\n"
@@ -630,7 +638,7 @@ def go_changes(call):
     #     bot.clear_step_handler(msg)
     #     bot.register_next_step_handler(msg, get_lang_level)
     if call.data == '25':
-        msg = bot.send_message(call.from_user.id,'Напишіть в якій країні ви живете', )
+        msg = bot.send_message(call.from_user.id, 'Напишіть в якій країні ви живете', )
         bot.clear_step_handler(msg)
         bot.register_next_step_handler(msg, get_country)
     elif call.data == '26':
@@ -641,11 +649,6 @@ def go_changes(call):
         msg = bot.send_message(call.from_user.id, 'Скільки часу ви займали цю посаду?', reply_markup=next_step_but8())
         bot.clear_step_handler(msg)
         bot.register_next_step_handler(msg, get_how_long)
-
-
-
-
-
 
 
 bot.polling(none_stop=True)
