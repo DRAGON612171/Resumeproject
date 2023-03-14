@@ -4,7 +4,6 @@ from .forms import LoginForm
 from .main_db import readTable
 
 right_tuple = ''
-datas = ''
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -59,14 +58,6 @@ def resume():
         soft_skills = right_tuple[-6]
 
     portal()
-
-    def dicti():
-        global datas
-        for new in range(len(right_tuple)):
-            datas = {new: right_tuple[new]}
-            print(datas)
-
-    dicti()
 
     return render_template('index.html', profession=profession, name_surname=name_surname, phone_number=phone_number,
                            email=email, education=education, tech_skills=tech_skills, soft_skills=soft_skills,
