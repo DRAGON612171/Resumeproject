@@ -82,7 +82,7 @@
     }
 
     .pst_wrk {
-        color: #ff0000;
+        color: #FB6D3A;
     }
 
     .li{
@@ -165,13 +165,14 @@
             <!-- Work experience -->
             <div class="experience">
                 <h3 class="main_title">Work Experience</h3>
-                {% for i in range( past_work | length ) %}
+                {% for i in range( past_work | length) %}
                 <div>
                     <h4 class="pst_wrk">{{past_work[i]}}</h4>
                     <p>{{how_long[i]}}</p>
                     <ul class='pst_wrk_list'>
                         <li class="li"> <span>{{job_description[i]}}</span></li>
                     </ul>
+                    <hr>
                 </div>
                 {% endfor %}
             </div>
