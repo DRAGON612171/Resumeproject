@@ -4,7 +4,7 @@ import random
 import string
 from Resumeproject.app.main_db import writeTable
 
-bot = telebot.TeleBot("5662928795:AAHhdf4WxBx_CGY1x5CU85Y5qR06Y3UgcFQ")
+bot = telebot.TeleBot("6146197636:AAH-kokmD73gVwykAEOiqA4saLgPoRuV0x4")
 
 profession = ''
 name_surname = ''
