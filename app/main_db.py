@@ -2,6 +2,13 @@ import psycopg2
 import sshtunnel
 
 
+def rewrite(right):
+    a = []
+    for lab in range(len(right)):
+        a = '"{0}"'.format(right[lab])
+    return a
+
+
 def writeTable(id, name_surname, phone_number, email, education, lang, lang_level, country, city, password, description,
     profession, soft_skills, tech_skills, projects, how_long, job_description, past_work):
     sshtunnel.SSH_TIMEOUT = 10.0
@@ -23,8 +30,8 @@ def writeTable(id, name_surname, phone_number, email, education, lang, lang_leve
                             id, name_surname, phone_number, email, education, lang, lang_level, country, city, password,
                             description, profession, soft_skills, tech_skills, projects, how_long, job_description, past_work)
                             VALUES ({}, '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}');""".format(id,
-                            name_surname, phone_number, email, education, lang, lang_level, country, city, password,
-                            description, profession, soft_skills, tech_skills, projects, how_long, job_description, past_work))
+                            name_surname, phone_number, email, rewrite(education), rewrite(lang), rewrite(lang_level), country, city, password,
+                            description, profession, rewrite(soft_skills), rewrite(tech_skills), rewrite(projects), rewrite(how_long), rewrite(job_description), rewrite(past_work)))
 
             connection.commit()
             connection.close()

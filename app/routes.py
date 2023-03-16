@@ -2,6 +2,7 @@ from app import app
 from flask import render_template, redirect, url_for
 from .forms import LoginForm
 from .main_db import readTable
+import json
 
 right_tuple = ''
 
@@ -56,6 +57,8 @@ def resume():
         projects = right_tuple[-4]
         tech_skills = right_tuple[-5]
         soft_skills = right_tuple[-6]
+        for lab in range(len(right_tuple)):
+            print('"{0}"'.format(right_tuple[lab]))
 
     portal()
 
