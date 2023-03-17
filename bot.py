@@ -28,7 +28,6 @@ update = False
 next_step = False
 
 
-
 def but_create():
     reply_markup = ReplyKeyboardMarkup(resize_keyboard=True)
     but1 = KeyboardButton('📄Створити резюме📄')

@@ -1,6 +1,12 @@
 import psycopg2
 import sshtunnel
+import json
 
+
+def rewrite(right):
+    a = right.replace('[', '{')
+    b = a.replace(']', '}')
+    return b
 
 
 def writeTable(id, name_surname, phone_number, email, education, lang, lang_level, country, city, password, description,
@@ -19,15 +25,14 @@ def writeTable(id, name_surname, phone_number, email, education, lang, lang_leve
                 host='127.0.0.1', port=tunnel.local_bind_port,
                 database='postgres')
             cur = connection.cursor()
-
             cur.execute("""INSERT INTO public.resume_db(
                             id, name_surname, phone_number, email, education, lang, lang_level, country, city, password,
                             description, profession, soft_skills, tech_skills, projects, how_long, job_description, past_work)
                             VALUES ({}, '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}');""".format(id,
-                            name_surname, phone_number, email, education, lang, lang_level,
+                            name_surname, phone_number, email, rewrite(json.dumps(education)), rewrite(json.dumps(lang)), rewrite(json.dumps(lang_level)),
                             country, city, password,
-                            description, profession, soft_skills,tech_skills, projects,
-                            how_long, job_description, past_work))
+                            description, profession, rewrite(json.dumps(soft_skills)), rewrite(json.dumps(tech_skills)), rewrite(json.dumps(projects)),
+                            rewrite(json.dumps(how_long)), rewrite(json.dumps(job_description)), rewrite(json.dumps(past_work))))
 
             connection.commit()
             connection.close()
