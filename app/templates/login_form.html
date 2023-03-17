@@ -7,7 +7,8 @@
 <body>
     <style>
         body {
-            background-color: #f7f7f7;
+            background: url(static/preview.gif) center / cover;
+            background-position: center center;
             color: #333;
             font-family: Arial, sans-serif;
             font-size: 1rem;
@@ -46,14 +47,20 @@
             color: #333;
         }
         input[type="submit"] {
+            transition: .5s;
             border: none;
             border-radius: 3px;
-            color: #fff;
+            background-color: rgb(6, 18, 39);
             cursor: pointer;
             padding: 0.5rem 1rem;
             font-size: 1rem;
             margin-top: 1rem;
+            color: #fff;
         }
+        input[type=submit]:hover {
+            background-color: #FB6D3A;
+        }
+
         .background-styles{
             background-image: url(./css/2023-03-14\ 19.14.49.jpg);
             background-size: cover;
