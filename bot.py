@@ -114,7 +114,7 @@ def get_email(message):
             start(message)
         else:
             email = message.text
-        msg = bot.send_message(message.chat.id, 'Напишіть про вашу освіту', reply_markup=next_step_but())
+        msg = bot.send_message(message.chat.id, 'Напишіть рівень вашої освіти', reply_markup=next_step_but())
         bot.register_next_step_handler(msg, get_education)
     elif update:
         if message.text == '-':
@@ -451,56 +451,56 @@ def get_how_long(message):
 
 def next_step_but():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='20')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='20')
     markup.add(but)
     return markup
 
 
 def next_step_but2():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='21')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='21')
     markup.add(but)
     return markup
 
 
 def next_step_but3():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='22')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='22')
     markup.add(but)
     return markup
 
 
 def next_step_but4():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='23')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='23')
     markup.add(but)
     return markup
 
 
 def next_step_but5():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='24')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='24')
     markup.add(but)
     return markup
 
 
 def next_step_but6():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='25')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='25')
     markup.add(but)
     return markup
 
 
 def next_step_but7():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='26')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='26')
     markup.add(but)
     return markup
 
 
 def next_step_but8():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='27')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='27')
     markup.add(but)
     return markup
 
@@ -563,7 +563,7 @@ def go_changes(call):
         bot.register_next_step_handler(msg, get_email)
     if call.data == '4':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть про вашу освіту')
+        msg = bot.send_message(call.from_user.id, 'Напишіть рівень вашої освіти')
         bot.register_next_step_handler(msg, get_education)
     elif call.data == '5':
         update = True
