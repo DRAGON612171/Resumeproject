@@ -1,0 +1,5 @@
+pytelegrambotAPI
+flask
+flask-wtf
+psycopg2
+sshtunnel

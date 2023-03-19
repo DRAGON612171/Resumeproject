@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="background-styles">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -11,94 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-<style>
-    body{
-    font-family: 'Montserrat', sans-serif;
-    background-color: #F5F7FA;}
-
-    .main_container{
-        display: flex;
-        width: 1200px;
-        background-color: #fff;
-        margin: 40px auto;
-    }
-
-    .main_context{
-        width: 790px;
-        padding: 24px;
-    }
-
-    .person, .projects, .education, .experience, .expectation{
-        color: black;
-        margin: 30px;
-    }
-
-    .li{
-        margin-bottom: 5px;
-        font-size: 14px;
-        line-height: 24px;
-    }
-
-    .profession{
-        font-size: 14px;
-        font-weight: 700;
-        color: #000;
-    }
-
-    .skills_item {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    .sidebar{
-        background-color: rgb(6, 18, 39);
-        color: #fff;
-        width: 420px;
-    }
-
-    .contact, .tech, .soft, .lang{
-        margin: 50px 0px 0px 40px;
-    }
-
-    .pst_wrk {
-        color: #FB6D3A;
-    }
-
-    .sidebar_title {
-        font-style: normal;
-        font-weight: bold;
-        font-size: 22px;
-        line-height: 27px;
-    }
-
-    .contact_link {
-        margin-left: 5px;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 24px;
-        color: #565E6A;
-    }
-
-    .skills_list {
-        padding-left: 18px;
-
-    }
-
-    .skills_item {
-        color: #FB6D3A;
-    }
-
-    .skills_item_text {
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 24px;
-        color: #fff;
-    }
-</style>
 <body>
     <!-- body of page -->
     <div class="main_container">
@@ -109,36 +23,35 @@
                 <h2 class="profession">{{profession}}</h2>
                 <h1 class="name">{{name_surname}}</h1>
                 <h4>{{country}}, {{city}}</h4>
-                <p>{{description}}</p>
+                <p class="description">{{description}}</p>
             </div>
             <!-- Projects -->
             <div class="projects">
-                <h3>Project</h3>
-                <ol>
+                <h3 class="main_title">Project</h3>
+                <ol class="projects_list">
                     {% for i in range(projects | length) %}
-                    <li class="li"><a href={{projects}}>{{projects[i]}}</a></li>
+                    <li class="li"><a class="des" href={{projects}}>{{projects[i]}}</a></li>
                     {% endfor %}
                 </ol>
             </div>
             <!-- Education-->
             <div class="education">
-                <h3>Education</h3>
+                <h3 class="main_title">Education</h3>
                 <h4>{{education}}</h4>
             </div>
             <!-- Work experience -->
             <div class="experience">
-                <h3>Work Experience</h3>
+                <h3 class="main_title">Work Experience</h3>
+                {% for i in range( past_work | length) %}
                 <div>
-                    <h4 class="pst_wrk">{{past_work}}</h4>
-                    {% for a in range( how_long | length ) %}
-                    <p>{{how_long[a]}}</p>
-                    {% endfor %}
-                    <ul>
-                        {% for i in range(job_description | length) %}
+                    <h4 class="pst_wrk">{{past_work[i]}}</h4>
+                    <p>{{how_long[i]}}</p>
+                    <ul class='pst_wrk_list'>
                         <li class="li"> <span>{{job_description[i]}}</span></li>
-                        {% endfor %}
                     </ul>
+                    <hr>
                 </div>
+                {% endfor %}
             </div>
         </div>
         <aside class="sidebar">
@@ -185,4 +98,5 @@
     </div>
 </body>
 </html>
+
 
