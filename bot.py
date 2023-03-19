@@ -79,7 +79,7 @@ def get_name_surname(message):
             name_surname = message.text
             bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
             update = False
-    print('surname =', name_surname)
+    print('name_surname =', name_surname)
 
 
 def get_phone_number(message):

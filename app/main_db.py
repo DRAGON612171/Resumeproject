@@ -29,10 +29,10 @@ def writeTable(id, name_surname, phone_number, email, education, lang, lang_leve
                             id, name_surname, phone_number, email, education, lang, lang_level, country, city, password,
                             description, profession, soft_skills, tech_skills, projects, how_long, job_description, past_work)
                             VALUES ({}, '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}');""".format(id,
-                            name_surname, phone_number, email, rewrite(json.dumps(education)), rewrite(json.dumps(lang)), rewrite(json.dumps(lang_level)),
+                            name_surname, phone_number, email, rewrite(json.dumps(education, ensure_ascii=False)), rewrite(json.dumps(lang, ensure_ascii=False)), rewrite(json.dumps(lang_level, ensure_ascii=False)),
                             country, city, password,
-                            description, profession, rewrite(json.dumps(soft_skills)), rewrite(json.dumps(tech_skills)), rewrite(json.dumps(projects)),
-                            rewrite(json.dumps(how_long)), rewrite(json.dumps(job_description)), rewrite(json.dumps(past_work))))
+                            description, profession, rewrite(json.dumps(soft_skills, ensure_ascii=False)), rewrite(json.dumps(tech_skills, ensure_ascii=False)), rewrite(json.dumps(projects, ensure_ascii=False)),
+                            rewrite(json.dumps(how_long, ensure_ascii=False)), rewrite(json.dumps(job_description, ensure_ascii=False)), rewrite(json.dumps(past_work, ensure_ascii=False))))
 
             connection.commit()
             connection.close()
