@@ -114,7 +114,7 @@ def get_email(message):
             start(message)
         else:
             email = message.text
-        msg = bot.send_message(message.chat.id, 'Напишіть про вашу освіту', reply_markup=next_step_but())
+        msg = bot.send_message(message.chat.id, 'Напишіть рівень вашої освіти', reply_markup=next_step_but())
         bot.register_next_step_handler(msg, get_education)
     elif update:
         if message.text == '-':
@@ -263,7 +263,7 @@ def get_lang_level(message):
                 start(message)
             else:
                 lang_level.append(message.text)
-            bot.register_next_step_handler(bot.send_message(message.chat.id, 'Введіть наступну мову яку ви знаєте', reply_markup=next_step_but6()), get_lang)
+            bot.register_next_step_handler(bot.send_message(message.chat.id, 'Введіть наступну мову якою ви володієте', reply_markup=next_step_but6()), get_lang)
         elif update:
             if message.text == '-':
                 pass
@@ -331,7 +331,7 @@ def get_profession(message):
             start(message)
         else:
             profession = message.text
-        msg = bot.send_message(message.chat.id, 'Напишіть, що ви хочете отримати від роботи(можете ще написати інші факти про себе)')
+        msg = bot.send_message(message.chat.id, 'Напишіть, що ви очікуєте від цієї посади(можете розповісти щось про себе)')
         bot.register_next_step_handler(msg, get_description)
     elif update:
         if message.text == '-':
@@ -380,7 +380,7 @@ def get_work_experience(message):
                 start(message)
             else:
                 work_experience.append(message.text)
-            msg = bot.send_message(message.chat.id, 'Введіть, що робили на цій роботі')
+            msg = bot.send_message(message.chat.id, 'Опишіть, що робили на цій роботі')
             bot.register_next_step_handler(msg, get_job_description)
         elif update:
             if message.text == '-':
@@ -445,49 +445,49 @@ def get_how_long(message):
 
 def next_step_but():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='20')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='20')
     markup.add(but)
     return markup
 
 
 def next_step_but2():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='21')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='21')
     markup.add(but)
     return markup
 
 
 def next_step_but3():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='22')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='22')
     markup.add(but)
     return markup
 
 
 def next_step_but4():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='23')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='23')
     markup.add(but)
     return markup
 
 
 def next_step_but6():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='25')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='25')
     markup.add(but)
     return markup
 
 
 def next_step_but7():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='26')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='26')
     markup.add(but)
     return markup
 
 
 def next_step_but8():
     markup = InlineKeyboardMarkup(row_width=1)
-    but = InlineKeyboardButton('Продовжити опитування', callback_data='27')
+    but = InlineKeyboardButton('Продовжити складання резюме', callback_data='27')
     markup.add(but)
     return markup
 
@@ -515,7 +515,7 @@ def changes():
     but10 = InlineKeyboardButton("🤟Місто🤟", callback_data='10')
     but11 = InlineKeyboardButton("👨‍🎓Професія👨‍🎓", callback_data='11')
     but12 = InlineKeyboardButton("😱Очікування😱", callback_data='12')
-    but13 = InlineKeyboardButton("🤯Досвід роботи🤯", callback_data='13')
+    but13 = InlineKeyboardButton("🤯Минула посада🤯", callback_data='13')
     but17 = InlineKeyboardButton("😱Ваша робота на минулій посаді😱", callback_data='17')
     but18 = InlineKeyboardButton("🤯Термін вашої минулої роботи🤯", callback_data='18')
     markup.add(but1, but2, but3, but4, but5, but6, but7, but8, but9, but10, but11, but12, but13, but14, but17, but18)
@@ -549,15 +549,15 @@ def go_changes(call):
         bot.register_next_step_handler(msg, get_email)
     if call.data == '4':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть про вашу освіту')
+        msg = bot.send_message(call.from_user.id, 'Напишіть рівень вашої освіту')
         bot.register_next_step_handler(msg, get_education)
     elif call.data == '5':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть про ваші Tech навички')
+        msg = bot.send_message(call.from_user.id, 'Напишіть ваші Tech навички')
         bot.register_next_step_handler(msg, get_tech_skills)
     if call.data == '6':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть про ваші проекти або надішліть посилання на них')
+        msg = bot.send_message(call.from_user.id, 'Напишіть про ваші проекти або вставте посилання на них')
         bot.register_next_step_handler(msg, get_projects)
     elif call.data == '7':
         update = True
@@ -581,19 +581,19 @@ def go_changes(call):
         bot.register_next_step_handler(msg, get_profession)
     if call.data == '12':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть ваші очікування від роботи')
+        msg = bot.send_message(call.from_user.id, 'Напишіть ваші очікування від цієї посади')
         bot.register_next_step_handler(msg, get_description)
     elif call.data == '13':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть про ваш минулий досвід роботи')
+        msg = bot.send_message(call.from_user.id, 'Напишіть про ваш минулий досвід роботи(назва посади)')
         bot.register_next_step_handler(msg, get_work_experience)
     if call.data == '14':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть про ваші Soft навички')
+        msg = bot.send_message(call.from_user.id, 'Напишіть ваші Soft навички')
         bot.register_next_step_handler(msg, get_soft_skills)
     elif call.data == '17':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Що ви робили на цій посаді')
+        msg = bot.send_message(call.from_user.id, 'Що ви робили на цій посаді(опишіть)')
         bot.register_next_step_handler(msg, get_job_description)
     if call.data == '18':
         update = True
@@ -601,7 +601,7 @@ def go_changes(call):
         bot.register_next_step_handler(msg, get_how_long)
     elif call.data == '20':
         next_step = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть про ваші Tech Skills', reply_markup=next_step_but2())
+        msg = bot.send_message(call.from_user.id, 'Напишіть ваші Tech Skills', reply_markup=next_step_but2())
         bot.clear_step_handler(msg)
         bot.register_next_step_handler(msg, get_tech_skills)
     if call.data == '21':
@@ -634,7 +634,7 @@ def go_changes(call):
                                           f"Ваше місто: {city}\n"
                                           f"Посада на яку претендуєте: {profession}\n"
                                           f"Ваші очікування від роботи: {description}\n"
-                                          f"Ваша минулий  досвід роботи: {work_experience}\n"
+                                          f"Ваш минулий досвід роботи(минула посада): {work_experience}\n"
                                           f"Що ви робили на цій посаді: {job_description}\n"
                                           f"Скільки часу ви займали цю посаду: {how_long}\n"
                                           "Чи хочете відредагувати свої дані?'\n", reply_markup=end_keyboard())
