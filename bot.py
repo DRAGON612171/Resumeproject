@@ -6,22 +6,22 @@ from Resumeproject.app.main_db import writeTable
 
 bot = telebot.TeleBot("6146197636:AAH-kokmD73gVwykAEOiqA4saLgPoRuV0x4")
 
-profession = ''
-name_surname = ''
-phone_number = ''
-email = ''
+profession = ' '
+name_surname = ' '
+phone_number = ' '
+email = ' '
 education = list()
 tech_skills = list()
 soft_skills = list()
 projects = list()
 lang = list()
 lang_level = list()
-country = ''
-city = ''
+country = ' '
+city = ' '
 work_experience = list()
-user_id = ''
-rand_password = ''
-description = ''
+user_id = ' '
+rand_password = ' '
+description = ' '
 how_long = list()
 job_description = list()
 update = False
@@ -246,7 +246,7 @@ def get_lang(message):
             elif message.text == '/start':
                 start(message)
             else:
-                lang = message.text
+                lang.append(message.text)
                 bot.send_message(message.chat.id, 'Хочете ще щось змінити?', reply_markup=end_keyboard())
                 update = False
     print('lang = ', lang)
@@ -263,7 +263,7 @@ def get_lang_level(message):
                 start(message)
             else:
                 lang_level.append(message.text)
-            bot.register_next_step_handler(bot.send_message(message.chat.id, 'Введіть наступну мову якою ви володієте', reply_markup=next_step_but6()), get_lang)
+            bot.register_next_step_handler(bot.send_message(message.chat.id, 'Введіть наступну мову, якою ви володієте', reply_markup=next_step_but6()), get_lang)
         elif update:
             if message.text == '-':
                 pass
@@ -524,7 +524,7 @@ def changes():
 
 @bot.callback_query_handler(func=lambda c: True)
 def go_changes(call):
-    global update, rand_password, next_step
+    global update, rand_password, next_step, name_surname, phone_number, email, education, lang, lang_level, country, city, rand_password,description, profession, soft_skills, tech_skills, projects, how_long, job_description, work_experience
     if call.data == '15':
         bot.send_message(call.from_user.id, 'Що бажаєте змінити?', reply_markup=changes())
     if call.data == '16':
@@ -549,14 +549,19 @@ def go_changes(call):
         bot.register_next_step_handler(msg, get_email)
     if call.data == '4':
         update = True
+        education.clear()
+        msg = bot.send_message(call.from_user.id, 'Напишіть про вашу освіту')
         msg = bot.send_message(call.from_user.id, 'Напишіть рівень вашої освіту')
         bot.register_next_step_handler(msg, get_education)
     elif call.data == '5':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть ваші Tech навички')
-        bot.register_next_step_handler(msg, get_tech_skills)
+        soft_skills.clear()
+        msg = bot.send_message(call.from_user.id, 'Напишіть про ваші Soft навички')
+        bot.register_next_step_handler(msg, get_soft_skills)
     if call.data == '6':
         update = True
+        projects.clear()
+        msg = bot.send_message(call.from_user.id, 'Напишіть про ваші проекти або надішліть посилання на них')
         msg = bot.send_message(call.from_user.id, 'Напишіть про ваші проекти або вставте посилання на них')
         bot.register_next_step_handler(msg, get_projects)
     elif call.data == '7':
@@ -585,18 +590,21 @@ def go_changes(call):
         bot.register_next_step_handler(msg, get_description)
     elif call.data == '13':
         update = True
+        work_experience.clear()
         msg = bot.send_message(call.from_user.id, 'Напишіть про ваш минулий досвід роботи(назва посади)')
         bot.register_next_step_handler(msg, get_work_experience)
     if call.data == '14':
         update = True
-        msg = bot.send_message(call.from_user.id, 'Напишіть ваші Soft навички')
-        bot.register_next_step_handler(msg, get_soft_skills)
+        soft_skills.clear()
+        msg = bot.send_message(call.from_user.id, 'Напишіть про ваші Tech навички')
+        bot.register_next_step_handler(msg, get_tech_skills)
     elif call.data == '17':
         update = True
         msg = bot.send_message(call.from_user.id, 'Що ви робили на цій посаді(опишіть)')
         bot.register_next_step_handler(msg, get_job_description)
     if call.data == '18':
         update = True
+        how_long.clear()
         msg = bot.send_message(call.from_user.id, 'Скільки часу ви займали цю посаду?')
         bot.register_next_step_handler(msg, get_how_long)
     elif call.data == '20':
