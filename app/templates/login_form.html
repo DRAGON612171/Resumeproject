@@ -60,10 +60,6 @@
         input[type=submit]:hover {
             background-color: #FB6D3A;
         }
-
-        .background-styles{
-            background-image: url(./css/2023-03-14\ 19.14.49.jpg);
-            background-size: cover;
         }
         .form-styles{
             background-color: white;
@@ -79,10 +75,6 @@
         }
         .btn-styles:focus{
             background-color: gray;
-            background-color: pink;
-        }
-        .btn-styles:focus{
-            background-color: pink;
         }
     </style>
     <h1 class="text-styles">Sign In</h1>
@@ -100,7 +92,7 @@
             {% endfor %}
             {{ user.password(size=32) }}
         </p>
-        <p class="btn-styles">{{ user.submit() }}</p>
+        <p>{{ user.submit() }}</p>
     </form>
 </body>
 </html>
