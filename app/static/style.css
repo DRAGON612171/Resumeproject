@@ -1,7 +1,10 @@
 
-.body{
+body{
     background: url(./photo4.jpg) center / cover;
-    font-family: 'Montserrat', sans-serif;}
+    font-family: 'Montserrat', sans-serif;
+    background-size: cover;
+    }
+
 
 .main_container{
     display: flex;
