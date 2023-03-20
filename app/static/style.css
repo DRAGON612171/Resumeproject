@@ -1,10 +1,9 @@
 
 body{
-    background: url(./photo4.jpg) center / cover;
-    font-family: 'Montserrat', sans-serif;
+    background: url(./photo4.jpg)no-repeat center center fixed;
     background-size: cover;
-    }
-
+    font-family: 'Montserrat', sans-serif;
+}
 
 .main_container{
     display: flex;
